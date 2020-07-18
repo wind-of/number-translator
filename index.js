@@ -1,6 +1,5 @@
 const { digits, from10To19, dozens, hundreds, rateWords } = require("./utils/word.forms");
 
-
 const getDigit = number => number > 0 ? " " + wordFrom(number) : "";
 const getDozen = number => dozens[number - 2];
 const getHundred = number => hundreds[number - 1];
@@ -20,9 +19,10 @@ const getCorrespondingRateWord = (number, rate) => {
 
 function wordFrom(number) {
   if(number === undefined || number === null || isNaN(parseFloat(number))) return;
+  
   number = number.toString();
-
   const numberDigits = number.split("");
+  
   if(number < 10) return digits[number];
   if(number < 20) return from10To19[number - 10];
   if(number < 100) {
@@ -35,8 +35,8 @@ function wordFrom(number) {
   }
   
   const sortDigitsToCorrespondingRates = (rates, digit, idx) => {
-    const digitRate = Math.floor(idx / 3);
-    rates[digitRate] = digit + (rates[digitRate] || "");
+    const currentDigitsRate = Math.floor(idx / 3);
+    rates[currentDigitsRate] = digit + (rates[currentDigitsRate] || "");
     return rates
   }
   const convertRatesToWords = (words, number, rate) => {
@@ -45,14 +45,12 @@ function wordFrom(number) {
     return words;
   }
 
-  return number
-    .split("")
+  return numberDigits
     .reverse()
     .reduce(sortDigitsToCorrespondingRates, new Array())
     .reduce(convertRatesToWords, new Array())
     .reverse()
     .join(" ")
 }
-
 
 module.exports = wordFrom
