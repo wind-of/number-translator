@@ -10,8 +10,8 @@ const {
 function getTranslatedNumberWithCorrespondingRateWord(number, rate) {
   if(rate === 0) return wordFrom(number);
   const translatedNumber = translateNumber(number);
-  const lastDigit = number.split("").pop();
-  return (translatedNumber ? translatedNumber + " " : "") + getRateWord(lastDigit, rate)
+  const twoLastDigits = number.split("").slice(number.length - 2).join("");
+  return (translatedNumber ? translatedNumber + " " : "") + getRateWord(twoLastDigits, rate)
 }
 
 function translateNumber(number) {

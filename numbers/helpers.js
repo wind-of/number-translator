@@ -17,8 +17,12 @@ function translateLastDigit(number) {
   return number > 0 ? " " + digits[number] : "";
 }
 function getRateWord(number, rate) {
-  if(number == 1) return rateWords[rate][0];
-  if(number < 5 && number > 1) return rateWords[rate][1];
+  if(number < 20 && number > 10) return rateWords[rate][2];
+  
+  const lastDigit = number.split("").pop();
+  if(lastDigit == 1) return rateWords[rate][0];
+  if(lastDigit < 5 && lastDigit > 1) return rateWords[rate][1];
+
   return rateWords[rate][2]
 }
 
