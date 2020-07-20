@@ -109,5 +109,5 @@ function wordFrom(number) {
     .reverse()
     .join(" ")
 }
-
+console.log(wordFrom("00001"))
 module.exports = wordFrom

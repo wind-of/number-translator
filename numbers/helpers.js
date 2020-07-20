@@ -6,7 +6,8 @@ const getHundreds = number => hundreds[number - 1];
 
 function translateNumberLessThan100(number) {
   const numberDigits = number.split("");
-  if(number < 10) return getDigit(number);
+
+  if(number < 10) return getDigit(Number(number));
   if(number < 20) return from10To19[number - 10];
   if(number < 100) {
     const numberLength = numberDigits.length;
