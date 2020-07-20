@@ -7,6 +7,57 @@ const {
   getCategoryWord 
 } = require("./numbers/helpers");
 
+/**
+ * @function getTranslatedNumberWithCorrespondingRateWord
+ * @param {Number} number
+ * A number with three or less digits. Example: "123", "21", "1", ...
+ * @param {Number} category
+ * Position of the number in the source number. Example: 5765123321 => 5(3) 756(2) 123(1) 321(0)
+ * 
+ * @returns A word equivalent of the "number".
+ * @when The category is equal to zero.
+ * 
+ * @returns Word corresponding to the category.
+ * @when The "number" is equal to zero or one in the numeric equivalent.
+ * 
+ * @returns A word equivalent of the "number" with corresponding to the category word.
+ * @when Every other case.
+ */
+/**
+ * @function translateNumber
+ * Gets word equivalent of the passed number.
+ * @param {Number} number 
+ * A number with three or less digits. Example: "123", "21", "1"
+ * 
+ * @returns Empty string (""). 
+ * @when The "number" is equal to zero or one in the numeric equivalent.
+ *
+ * @returns A word equivalent of the "number".
+ * @when Every other case.
+ */
+/**
+ * @function sortDigitsToCorrespondingCategories
+ * @param {Array<String>} categories 
+ * An array where will contain categories of the source number.
+ * @param {String} digit 
+ * A string digit, one of "1", "2", "3", ..., "9".
+ * @param {Number} idx 
+ * Index of the current digit.
+ * 
+ * @return An array of number categories.
+ */
+/**
+ * @function convertCategoriesOfNumbersToWords
+ * @param {Array<String>} words 
+ * An array where will contain word equivalents of numbers.
+ * @param {String} number 
+ * A string of numbers with three or less digits. Example: "123", "21", "1".
+ * @param {Number} category 
+ * Position of the number in the source number. Example: 5765123321 => 5(3) 756(2) 123(1) 321(0)
+ * 
+ * @return An array of translated words.
+ */
+
 function getTranslatedNumberWithCorrespondingCategoryWord(number, category) {
   if(category === 0) return wordFrom(number);
   const translatedNumber = translateNumber(number);
