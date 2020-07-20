@@ -110,6 +110,4 @@ function wordFrom(number) {
     .join(" ")
 }
 
-console.log(wordFrom(2000))
-
 module.exports = wordFrom

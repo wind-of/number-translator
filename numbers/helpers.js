@@ -9,7 +9,8 @@ function translateNumberLessThan100(number) {
   if(number < 10) return getDigit(number);
   if(number < 20) return from10To19[number - 10];
   if(number < 100) {
-    const [dozen, digit] = numberDigits;
+    const numberLength = numberDigits.length;
+    const [dozen, digit] = numberDigits.slice(numberLength - 2, numberLength);
     return getDozens(dozen) + translateLastDigit(digit);
   }
 }
