@@ -60,8 +60,18 @@ const {
 
 function getTranslatedNumberWithCorrespondingCategoryWord(number, category) {
   if(category === 0) return wordFrom(number);
-  const translatedNumber = translateNumber(number);
+
   const twoLastDigits = number.split("").slice(number.length - 2).join("");
+
+  // Прикол: Два миллиона, два миллиарда, два триллиона и т.д., НО(!) две тысячи :/
+  if(category === 1 && number.split("").pop() === "2" && twoLastDigits !== "12") {
+    const lastPart = "две тысячи";
+    const wordFromNumber = wordFrom(number);
+    const firstPart = wordFromNumber.slice(0, wordFromNumber.length - 3);
+    return firstPart + lastPart
+  }
+
+  const translatedNumber = translateNumber(number);
   return (translatedNumber ? translatedNumber + " " : "") + getCategoryWord(twoLastDigits, category)
 }
 
@@ -76,8 +86,8 @@ function wordFrom(number) {
   if(number < 100) return translateNumberLessThan100(number);
   if(number < 1000) {
     const [firstDigit, ...rest] = number.split("");
-    const wordFromEndOfNumber = Number(rest.join("")) === 0 ? "" : " " + wordFrom(rest.join(""));
-    return getHundreds(firstDigit) + wordFromEndOfNumber
+    const lastPart = Number(rest.join("")) === 0 ? "" : " " + wordFrom(rest.join(""));
+    return getHundreds(firstDigit) + lastPart
   }
   
   function sortDigitsToCorrespondingCategories(categories, digit, idx) {
@@ -99,5 +109,7 @@ function wordFrom(number) {
     .reverse()
     .join(" ")
 }
+
+console.log(wordFrom(2000))
 
 module.exports = wordFrom
