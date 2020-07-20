@@ -4,14 +4,14 @@ const {
   getDigit, 
   getDozens, 
   getHundreds, 
-  getRateWord 
+  getCategoryWord 
 } = require("./numbers/helpers");
 
-function getTranslatedNumberWithCorrespondingRateWord(number, rate) {
-  if(rate === 0) return wordFrom(number);
+function getTranslatedNumberWithCorrespondingCategoryWord(number, category) {
+  if(category === 0) return wordFrom(number);
   const translatedNumber = translateNumber(number);
   const twoLastDigits = number.split("").slice(number.length - 2).join("");
-  return (translatedNumber ? translatedNumber + " " : "") + getRateWord(twoLastDigits, rate)
+  return (translatedNumber ? translatedNumber + " " : "") + getCategoryWord(twoLastDigits, category)
 }
 
 function translateNumber(number) {
@@ -29,13 +29,13 @@ function wordFrom(number) {
     return getHundreds(firstDigit) + wordFromEndOfNumber
   }
   
-  const sortDigitsToCorrespondingRates = (rates, digit, idx) => {
-    const currentDigitsRate = Math.floor(idx / 3);
-    rates[currentDigitsRate] = digit + (rates[currentDigitsRate] || "");
-    return rates
+  function sortDigitsToCorrespondingCategories(categories, digit, idx) {
+    const currentDigitsCategory = Math.floor(idx / 3);
+    categories[currentDigitsCategory] = digit + (categories[currentDigitsCategory] || "");
+    return categories
   }
-  const convertRatesOfNumbersToWords = (words, number, rate) => {
-    const wordFromNumber = getTranslatedNumberWithCorrespondingRateWord(number, rate);
+  function convertCategoriesOfNumbersToWords(words, number, category) {
+    const wordFromNumber = getTranslatedNumberWithCorrespondingCategoryWord(number, category);
     if(Boolean(wordFromNumber)) words.push(wordFromNumber);
     return words;
   }
@@ -43,8 +43,8 @@ function wordFrom(number) {
   return number
     .split("")
     .reverse()
-    .reduce(sortDigitsToCorrespondingRates, new Array())
-    .reduce(convertRatesOfNumbersToWords, new Array())
+    .reduce(sortDigitsToCorrespondingCategories, new Array())
+    .reduce(convertCategoriesOfNumbersToWords, new Array())
     .reverse()
     .join(" ")
 }

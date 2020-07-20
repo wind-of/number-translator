@@ -1,4 +1,4 @@
-const { digits, from10To19, dozens, hundreds, rateWords } = require("./word.forms");
+const { digits, from10To19, dozens, hundreds, categoryWords } = require("./word.forms");
 
 const getDigit = number => digits[number];
 const getDozens = number => dozens[number - 2];
@@ -16,14 +16,14 @@ function translateNumberLessThan100(number) {
 function translateLastDigit(number) {
   return number > 0 ? " " + digits[number] : "";
 }
-function getRateWord(number, rate) {
-  if(number < 20 && number > 10) return rateWords[rate][2];
+function getCategoryWord(number, category) {
+  if(number < 20 && number > 10) return categoryWords[category][2];
   
   const lastDigit = number.split("").pop();
-  if(lastDigit == 1) return rateWords[rate][0];
-  if(lastDigit < 5 && lastDigit > 1) return rateWords[rate][1];
+  if(lastDigit == 1) return categoryWords[category][0];
+  if(lastDigit < 5 && lastDigit > 1) return categoryWords[category][1];
 
-  return rateWords[rate][2]
+  return categoryWords[category][2]
 }
 
 module.exports = {
@@ -32,5 +32,5 @@ module.exports = {
   getDigit,
   getDozens,
   getHundreds,
-  getRateWord
+  getCategoryWord
 }
