@@ -8,7 +8,7 @@ const {
 } = require("./numbers/helpers");
 
 /**
- * @function getTranslatedNumberWithCorrespondingRateWord
+ * @function getTranslatedNumberWithCorrespondingCategoryWord
  * @param {Number} number
  * A number with three or less digits. Example: "123", "21", "1", ...
  * @param {Number} category
@@ -60,7 +60,6 @@ const {
 
 function getTranslatedNumberWithCorrespondingCategoryWord(number, category) {
   if(category === 0) return wordFrom(number);
-
   const twoLastDigits = number.split("").slice(number.length - 2).join("");
 
   // Прикол: Два миллиона, два миллиарда, два триллиона и т.д., НО(!) две тысячи :/
@@ -106,6 +105,7 @@ function wordFrom(number) {
     .reverse()
     .reduce(sortDigitsToCorrespondingCategories, new Array())
     .reduce(convertCategoriesOfNumbersToWords, new Array())
+    .filter((number, __, arr) => arr.length > 1 ? (number !== "ноль") : true)
     .reverse()
     .join(" ")
 }
