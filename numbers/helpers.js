@@ -5,14 +5,12 @@ const getDozens = number => dozens[number - 2];
 const getHundreds = number => hundreds[number - 1];
 
 function translateNumberLessThan100(number) {
-  const numberDigits = number.split("");
-
   if(number < 10) return getDigit(Number(number));
   if(number < 20) return from10To19[number - 10];
   if(number < 100) {
-    const numberLength = numberDigits.length;
-    const [dozen, digit] = numberDigits.slice(numberLength - 2, numberLength);
-    return getDozens(dozen) + translateLastDigit(digit);
+    const numberDigits = number.split("");
+    const [dozen, digit] = numberDigits.slice(number.length - 2, number.length);
+    return getDozens(dozen) + translateLastDigit(digit)
   }
 }
 function translateLastDigit(number) {
