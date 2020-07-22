@@ -1,4 +1,5 @@
-const { digits, from10To19, dozens, hundreds, categoryWords } = require("./word.forms");
+const { digits, from10To19, dozens, hundreds, categoryWords } = require("./word.forms.js");
+const { twoLastDigits } = require("../utils.js");
 
 const getDigit = number => digits[number];
 const getDozens = number => dozens[number - 2];
@@ -8,8 +9,7 @@ function translateNumberLessThan100(number) {
   if(number < 10) return getDigit(Number(number));
   if(number < 20) return from10To19[number - 10];
   if(number < 100) {
-    const numberDigits = number.split("");
-    const [dozen, digit] = numberDigits.slice(number.length - 2, number.length);
+    const [dozen, digit] = twoLastDigits(number)
     return getDozens(dozen) + translateLastDigit(digit)
   }
 }
@@ -17,9 +17,10 @@ function translateLastDigit(number) {
   return number > 0 ? " " + digits[number] : "";
 }
 function getCategoryWord(number, category) {
-  if(number < 20 && number > 10) return categoryWords[category][2];
+  const _twoLastDigits = twoLastDigits(number);
+  if(_twoLastDigits < 20 && _twoLastDigits > 10) return categoryWords[category][2];
   
-  const lastDigit = number.split("").pop();
+  const lastDigit = _twoLastDigits[1] || _twoLastDigits[0];
   if(lastDigit == 1) return categoryWords[category][0];
   if(lastDigit < 5 && lastDigit > 1) return categoryWords[category][1];
 

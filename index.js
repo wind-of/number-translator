@@ -6,6 +6,7 @@
   getHundreds, 
   getCategoryWord 
 } = require("./numbers/helpers");
+const { twoLastDigits } = require("./utils.js");
 
 /**
  * @function getTranslatedNumberWithCorrespondingCategoryWord
@@ -25,10 +26,11 @@
  */
 function getTranslatedNumberWithCorrespondingCategoryWord(number, category) {
   if(category === 0) return wordFrom(number);
-  const twoLastDigits = number.split("").slice(number.length - 2).join("");
+  if(Number(number) === 0) return "";
+  const _twoLastDigits = twoLastDigits(number);
 
   // Прикол: Два миллиона, два миллиарда, два триллиона и т.д., НО(!) две тысячи :/
-  if(category === 1 && number.split("").pop() === "2" && twoLastDigits !== "12") {
+  if(category === 1 && number.split("").pop() === "2" && _twoLastDigits !== "12") {
     const lastPart = "две тысячи";
     const wordFromNumber = wordFrom(number);
     const firstPart = wordFromNumber.slice(0, wordFromNumber.length - 3);
@@ -36,7 +38,7 @@ function getTranslatedNumberWithCorrespondingCategoryWord(number, category) {
   }
 
   const translatedNumber = translateNumber(number);
-  return (translatedNumber ? translatedNumber + " " : "") + getCategoryWord(twoLastDigits, category)
+  return (translatedNumber ? translatedNumber + " " : "") + getCategoryWord(_twoLastDigits, category)
 }
 
 /**
@@ -52,7 +54,7 @@ function getTranslatedNumberWithCorrespondingCategoryWord(number, category) {
  * @when Otherwise.
  */
 function translateNumber(number) {
-  return [0, 1].includes(Number(number)) ? "" : wordFrom(number);
+  return Number(number) === 1 ? "" : wordFrom(number);
 }
 
 function wordFrom(number) {
