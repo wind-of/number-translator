@@ -1,4 +1,4 @@
-const { 
+;const { 
   translateLastDigit, 
   translateNumberLessThan100, 
   getDigit, 
@@ -21,7 +21,7 @@ const {
  * @when The "number" is equal to zero or one in the numeric equivalent.
  * 
  * @returns A word equivalent of the "number" with a corresponding to the category word.
- * @when Every other case.
+ * @when Otherwise.
  */
 function getTranslatedNumberWithCorrespondingCategoryWord(number, category) {
   if(category === 0) return wordFrom(number);
@@ -49,7 +49,7 @@ function getTranslatedNumberWithCorrespondingCategoryWord(number, category) {
  * @when The "number" is equal to zero or one in the numeric equivalent.
  *
  * @returns A word equivalent of the "number".
- * @when Every other case.
+ * @when Otherwise.
  */
 function translateNumber(number) {
   return [0, 1].includes(Number(number)) ? "" : wordFrom(number);
@@ -57,6 +57,8 @@ function translateNumber(number) {
 
 function wordFrom(number) {
   if(number === undefined || number === null || isNaN(parseFloat(number))) return;
+  if(!Number.isSafeInteger(Number(number))) 
+    return `Passed number is not safe. Available numbers are digit numbers in range [${Number.MIN_SAFE_INTEGER}; ${Number.MAX_SAFE_INTEGER}].`;
   number = number.toString();
   
   if(number < 100) return translateNumberLessThan100(number);
