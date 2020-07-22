@@ -57,8 +57,9 @@ function translateNumber(number) {
 
 function wordFrom(number) {
   if(number === undefined || number === null || isNaN(parseFloat(number))) return;
-  if(!Number.isSafeInteger(Number(number))) 
-    return `Passed number is not safe. Available numbers are digit numbers in range [${Number.MIN_SAFE_INTEGER}; ${Number.MAX_SAFE_INTEGER}].`;
+  if(typeof number !== "string" && !Number.isSafeInteger(Number(number))) 
+    return `Passed number is not safe. \nAvailable numbers are digit numbers in range [${Number.MIN_SAFE_INTEGER}; ${Number.MAX_SAFE_INTEGER}] \n...or pass the number wrapped in quotes.`;
+  
   number = number.toString();
   
   if(number < 100) return translateNumberLessThan100(number);
