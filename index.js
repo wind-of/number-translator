@@ -6,7 +6,7 @@
   getHundreds, 
   getCategoryWord 
 } = require("./numbers/helpers");
-const { twoLastDigits } = require("./utils.js");
+const { twoLastDigits, removeLastNSymbols } = require("./utils.js");
 
 /**
  * @function getTranslatedNumberWithCorrespondingCategoryWord
@@ -67,12 +67,14 @@ function translateNumber(number) {
 
 function wordFrom(number) {
   if(number === undefined || number === null || isNaN(parseFloat(number))) return;
-  if(typeof number !== "string" && !Number.isSafeInteger(Number(number))) 
+  if(typeof number !== "string" && !Number.isSafeInteger(number)) {
     return `Passed number is not safe. \nAvailable numbers are digit numbers in range [${Number.MIN_SAFE_INTEGER}; ${Number.MAX_SAFE_INTEGER}] \n...or pass the number wrapped in quotes.`;
-  
+  }
   number = number.toString();
   
-  if(number < 100) return translateNumberLessThan100(number);
+  if(number < 100) {
+    return translateNumberLessThan100(number)
+  }
   if(number < 1000) {
     const [firstDigit, ...rest] = number.split("");
     const lastPart = Number(rest.join("")) === 0 ? "" : " " + wordFrom(rest.join(""));
@@ -84,7 +86,7 @@ function wordFrom(number) {
    * @param {Array<String>} categories 
    * An array where will contain categories of the source number.
    * @param {String} digit 
-   * A string digit, one of "1", "2", "3", ..., "9".
+   * A string digit, one of "1", "2", "3", ..., "0".
    * @param {Number} idx 
    * Index of the current digit.
    * 
@@ -108,7 +110,9 @@ function wordFrom(number) {
    */
   function convertCategoriesOfNumbersToWords(words, number, category) {
     const wordFromNumber = getTranslatedNumberWithCorrespondingCategoryWord(number, category);
-    if(Boolean(wordFromNumber)) words.push(wordFromNumber);
+    if(Boolean(wordFromNumber)) {
+      words.push(wordFromNumber)
+    };
     return words;
   }
 
