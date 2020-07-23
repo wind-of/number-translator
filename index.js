@@ -27,18 +27,26 @@ const { twoLastDigits } = require("./utils.js");
 function getTranslatedNumberWithCorrespondingCategoryWord(number, category) {
   if(category === 0) return wordFrom(number);
   if(Number(number) === 0) return "";
-  const _twoLastDigits = twoLastDigits(number);
 
-  // Прикол: Два миллиона, два миллиарда, два триллиона и т.д., НО(!) две тысячи :/
-  if(category === 1 && number.split("").pop() === "2" && _twoLastDigits !== "12") {
-    const lastPart = "две тысячи";
-    const wordFromNumber = wordFrom(number);
-    const firstPart = wordFromNumber.slice(0, wordFromNumber.length - 3);
-    return firstPart + lastPart
+  // There are some fun in category 1 :/
+  if(category === 1) {
+    const lastDigit = number.split("").pop();
+    /**
+     * @why "Два миллиона", "два миллиарда", "два триллиона" and etc, BUT(!) "две тысячи", "тридцать две тысячи", ...
+     */
+    if(lastDigit === "2" && twoLastDigits(number) !== "12") {
+      return removeLastNSymbols(wordFrom(number), 3) + "две тысячи"
+    }
+    /**
+     * @why "Двадцать один миллион", "пятьдесять один миллиард" and etc, BUT(!) "двадцать одна тысяча", "сорок одна тысяча", ...
+     */
+    if(lastDigit === "1" && twoLastDigits(number) > "11") {
+      return removeLastNSymbols(wordFrom(number), 4) + "одна тысяча"
+    }
   }
-
+  
   const translatedNumber = translateNumber(number);
-  return (translatedNumber ? translatedNumber + " " : "") + getCategoryWord(_twoLastDigits, category)
+  return (translatedNumber ? translatedNumber + " " : "") + getCategoryWord(twoLastDigits(number), category)
 }
 
 /**
