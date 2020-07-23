@@ -1,6 +1,6 @@
 {
   "name": "number-translator",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Translate numbers into words and words into numbers!",
   "main": "index.js",
   "scripts": {
