@@ -71,7 +71,13 @@ function wordFrom(number) {
     return `Passed number is not safe. \nAvailable numbers are digit numbers in range [${Number.MIN_SAFE_INTEGER}; ${Number.MAX_SAFE_INTEGER}] \n...or pass the number wrapped in quotes.`;
   }
   number = number.toString();
-  
+
+  // Hanlding a negative number.
+  if(number < 0) {
+    return `минус ${wordFrom(number.slice(1))}`
+  }
+
+  // Default...
   if(number < 100) {
     return translateNumberLessThan100(number)
   }
