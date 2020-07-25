@@ -31,15 +31,11 @@ function getTranslatedNumberWithCorrespondingCategoryWord(number, category) {
   // There are some fun in category 1 :/
   if(category === 1) {
     const lastDigit = number.split("").pop();
-    /**
-     * @why "Два миллиона", "два миллиарда", "два триллиона" and etc, BUT(!) "две тысячи", "тридцать две тысячи", ...
-     */
+    // "Два миллиона", "два миллиарда", "два триллиона" ..., BUT(!) "две тысячи", "тридцать две тысячи", ...
     if(lastDigit === "2" && twoLastDigits(number) !== "12") {
       return removeLastNSymbols(wordFrom(number), 3) + "две тысячи"
     }
-    /**
-     * @why "Двадцать один миллион", "пятьдесять один миллиард" and etc, BUT(!) "двадцать одна тысяча", "сорок одна тысяча", ...
-     */
+    // "Двадцать один миллион", "пятьдесять один миллиард" ..., BUT(!) "двадцать одна тысяча", "сорок одна тысяча", ...
     if(lastDigit === "1" && twoLastDigits(number) > "11") {
       return removeLastNSymbols(wordFrom(number), 4) + "одна тысяча"
     }
