@@ -15,7 +15,7 @@ const getHundreds = number => hundreds[number - 1];
  * @function translateNumberLessThat100
  * Translates number that is less than 100 :/
  * @param {String} number 
- * A string of numbers with three or less digits. Example: "023", "021", "1"...
+ * A string of numbers with three or less digits. Example: "023", "201", "1"...
  * 
  * @return Translated number.
  */
@@ -55,12 +55,18 @@ function translateLastDigit(number) {
  * @return A string value that is a special class word.
  */
 function getClassWord(number, class_) {
-  const _twoLastDigits = twoLastDigits(number);
-  if(_twoLastDigits < 20 && _twoLastDigits > 10) return classWords[class_][2];
+  const twoLastDigits_ = twoLastDigits(number);
+  if(twoLastDigits_ < 20 && twoLastDigits_ > 10) {
+    return classWords[class_][2]
+  }
   
-  const lastDigit = _twoLastDigits[1] || _twoLastDigits[0];
-  if(lastDigit == 1) return classWords[class_][0];
-  if(lastDigit < 5 && lastDigit > 1) return classWords[class_][1];
+  const lastDigit = twoLastDigits_[1] || twoLastDigits_[0];
+  if(lastDigit == 1) {
+    return classWords[class_][0]
+  }
+  if(lastDigit < 5 && lastDigit > 1) {
+    return classWords[class_][1]
+  }
 
   return classWords[class_][2]
 }

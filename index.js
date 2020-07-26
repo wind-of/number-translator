@@ -6,7 +6,10 @@
   getHundreds, 
   getClassWord
 } = require("./numbers/helpers");
-const { twoLastDigits, removeLastNSymbols } = require("./utils.js");
+const { 
+  twoLastDigits,
+  removeLastNSymbols 
+} = require("./utils.js");
 
 /**
  * @function getTranslatedNumberWithCorrespondingClassWord
@@ -62,7 +65,7 @@ function translateNumber(number) {
 }
 
 function wordFrom(number) {
-  if(number === undefined || number === null || isNaN(parseFloat(number))) return;
+  if(isNaN(parseFloat(number))) return;
   if(typeof number !== "string" && !Number.isSafeInteger(number)) {
     return `Passed number is not safe. \nAvailable numbers are digit numbers in range [${Number.MIN_SAFE_INTEGER}; ${Number.MAX_SAFE_INTEGER}] \n...or pass the number wrapped in quotes.`;
   }
@@ -72,7 +75,6 @@ function wordFrom(number) {
   if(number < 0) {
     return `минус ${wordFrom(number.slice(1))}`
   }
-
   // Default...
   if(number < 100) {
     return translateNumberLessThan100(number)
@@ -114,8 +116,8 @@ function wordFrom(number) {
     const wordFromNumber = getTranslatedNumberWithCorrespondingClassWord(number, class_);
     if(Boolean(wordFromNumber)) {
       words.push(wordFromNumber)
-    };
-    return words;
+    }
+    return words
   }
 
   return number
