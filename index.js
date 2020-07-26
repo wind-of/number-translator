@@ -4,32 +4,32 @@
   getDigit, 
   getDozens, 
   getHundreds, 
-  getCategoryWord 
+  getClassWord
 } = require("./numbers/helpers");
 const { twoLastDigits, removeLastNSymbols } = require("./utils.js");
 
 /**
- * @function getTranslatedNumberWithCorrespondingCategoryWord
+ * @function getTranslatedNumberWithCorrespondingClassWord
  * @param {Number} number
  * A number with three or less digits. Example: "123", "21", "1", ...
- * @param {Number} category
+ * @param {Number} class_
  * Position of the number in the source number. Example: 5765123321 => 5(3) 756(2) 123(1) 321(0)
  * 
  * @returns A word equivalent of the "number".
- * @when The category is equal to zero.
+ * @when The class is equal to zero.
  * 
- * @returns Word corresponding to the category.
+ * @returns Word corresponding to the class.
  * @when The "number" is equal to zero or one in the numeric equivalent.
  * 
- * @returns A word equivalent of the "number" with a corresponding to the category word.
+ * @returns A word equivalent of the "number" with a corresponding to the class word.
  * @when Otherwise.
  */
-function getTranslatedNumberWithCorrespondingCategoryWord(number, category) {
-  if(category === 0) return wordFrom(number);
+function getTranslatedNumberWithCorrespondingClassWord(number, class_) {
+  if(class_ === 0) return wordFrom(number);
   if(Number(number) === 0) return "";
 
-  // There are some fun in category 1 :/
-  if(category === 1) {
+  // There are some fun in class 1 :/
+  if(class_ === 1) {
     const lastDigit = number.split("").pop();
     // "Два миллиона", "два миллиарда", "два триллиона" ..., BUT(!) "две тысячи", "тридцать две тысячи", ...
     if(lastDigit === "2" && twoLastDigits(number) !== "12") {
@@ -42,7 +42,7 @@ function getTranslatedNumberWithCorrespondingCategoryWord(number, category) {
   }
   
   const translatedNumber = translateNumber(number);
-  return (translatedNumber ? translatedNumber + " " : "") + getCategoryWord(twoLastDigits(number), category)
+  return (translatedNumber ? translatedNumber + " " : "") + getClassWord(twoLastDigits(number), class_)
 }
 
 /**
@@ -84,34 +84,34 @@ function wordFrom(number) {
   }
   
   /**
-   * @function sortDigitsToCorrespondingCategories
-   * @param {Array<String>} categories 
-   * An array where will contain categories of the source number.
+   * @function sortDigitsToCorrespondingClasses
+   * @param {Array<String>} classes 
+   * An array where will contain classes of the source number.
    * @param {String} digit 
    * A string digit, one of "1", "2", "3", ..., "0".
    * @param {Number} idx 
    * Index of the current digit.
    * 
-   * @return An array of number categories.
+   * @return An array of number classes.
    */
-  function sortDigitsToCorrespondingCategories(categories, digit, idx) {
-    const currentDigitsCategory = Math.floor(idx / 3);
-    categories[currentDigitsCategory] = digit + (categories[currentDigitsCategory] || "");
-    return categories
+  function sortDigitsToCorrespondingClasses(classes, digit, idx) {
+    const currentDigitsClass = Math.floor(idx / 3);
+    classes[currentDigitsClass] = digit + (classes[currentDigitsClass] || "");
+    return classes
   }
   /**
-   * @function convertCategoriesOfNumbersToWords
+   * @function convertClassesOfNumbersToWords
    * @param {Array<String>} words 
    * An array where will contain word equivalents of numbers.
    * @param {String} number 
    * A string of numbers with three or less digits. Example: "123", "21", "1".
-   * @param {Number} category 
+   * @param {Number} class_ 
    * Position of the number in the source number. Example: 5765123321 => 5(3) 756(2) 123(1) 321(0)
    * 
    * @return An array of translated words.
    */
-  function convertCategoriesOfNumbersToWords(words, number, category) {
-    const wordFromNumber = getTranslatedNumberWithCorrespondingCategoryWord(number, category);
+  function convertClassesOfNumbersToWords(words, number, class_) {
+    const wordFromNumber = getTranslatedNumberWithCorrespondingClassWord(number, class_);
     if(Boolean(wordFromNumber)) {
       words.push(wordFromNumber)
     };
@@ -121,8 +121,8 @@ function wordFrom(number) {
   return number
     .split("")
     .reverse()
-    .reduce(sortDigitsToCorrespondingCategories, new Array())
-    .reduce(convertCategoriesOfNumbersToWords, new Array())
+    .reduce(sortDigitsToCorrespondingClasses, new Array())
+    .reduce(convertClassesOfNumbersToWords, new Array())
     .filter((number, __, arr) => arr.length > 1 ? (number !== "ноль") : true)
     .reverse()
     .join(" ")

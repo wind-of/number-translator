@@ -1,4 +1,10 @@
-const { digits, from10To19, dozens, hundreds, categoryWords } = require("./word.forms.js");
+const { 
+  digits, 
+  from10To19, 
+  dozens, 
+  hundreds, 
+  classWords
+} = require("./word.forms.js");
 const { twoLastDigits } = require("../utils.js");
 
 const getDigit = number => digits[number];
@@ -37,25 +43,26 @@ function translateNumberLessThan100(number) {
 function translateLastDigit(number) {
   return number != 0 ? " " + digits[number] : "";
 }
+
 /**
- * @function getCategoryWord
- * Gets a special word of some category of number. Example: "тысяча", "миллион", "квадрагинтиллион", ...
+ * @function getClassWord
+ * Gets a special word of some class of number. Example: "тысяча", "миллион", "квадрагинтиллион", ...
  * @param {String} number 
  * A string of numbers with three or less digits. Example: "123", "21", "1"...
- * @param {Number} category 
+ * @param {Number} class 
  * Position of the number in the source number. Example: 5765123321 => 5(3) 756(2) 123(1) 321(0).
  * 
- * @return A string value that is a special category word.
+ * @return A string value that is a special class word.
  */
-function getCategoryWord(number, category) {
+function getClassWord(number, class_) {
   const _twoLastDigits = twoLastDigits(number);
-  if(_twoLastDigits < 20 && _twoLastDigits > 10) return categoryWords[category][2];
+  if(_twoLastDigits < 20 && _twoLastDigits > 10) return classWords[class_][2];
   
   const lastDigit = _twoLastDigits[1] || _twoLastDigits[0];
-  if(lastDigit == 1) return categoryWords[category][0];
-  if(lastDigit < 5 && lastDigit > 1) return categoryWords[category][1];
+  if(lastDigit == 1) return classWords[class_][0];
+  if(lastDigit < 5 && lastDigit > 1) return classWords[class_][1];
 
-  return categoryWords[category][2]
+  return classWords[class_][2]
 }
 
 module.exports = {
@@ -64,5 +71,5 @@ module.exports = {
   getDigit,
   getDozens,
   getHundreds,
-  getCategoryWord
+  getClassWord
 }
