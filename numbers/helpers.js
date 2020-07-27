@@ -3,7 +3,8 @@ const {
   from10To19, 
   dozens, 
   hundreds, 
-  classWords
+  classWords,
+  nonIntegerPartCategories
 } = require("./word.forms.js");
 const { twoLastDigits } = require("../utils.js");
 
@@ -71,11 +72,16 @@ function getClassWord(number, class_) {
   return classWords[class_][2]
 }
 
+function getCategoryWordForNonIntegerPart(category, type) {
+  return nonIntegerPartCategories[category][type]
+}
+
 module.exports = {
   translateLastDigit,
   translateNumberLessThan100,
   getDigit,
   getDozens,
   getHundreds,
-  getClassWord
+  getClassWord,
+  getCategoryWordForNonIntegerPart
 }

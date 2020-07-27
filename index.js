@@ -4,7 +4,8 @@
   getDigit, 
   getDozens, 
   getHundreds, 
-  getClassWord
+  getClassWord,
+  getCategoryWordForNonIntegerPart
 } = require("./numbers/helpers");
 const { 
   twoLastDigits,
@@ -64,10 +65,37 @@ function translateNumber(number) {
   return Number(number) === 1 ? "" : wordFrom(number);
 }
 
+/**
+ * @function translateNonIntegerPart
+ * Gets a special word of the some category of the number.
+ * @param {String} number
+ * A string number. 
+ * 
+ * @return Translated non-integer part.
+ */
+function translateNonIntegerPart(number) {
+  if(!number || Number(number) === 0) {
+    return ""
+  }
+  const translated = wordFrom(number);
+
+  const twoLastDigits_ = twoLastDigits(number);
+  const lastDigit = twoLastDigits_[1] || twoLastDigits_[0];
+  const nonIntegerPartType = lastDigit === "1" && twoLastDigits_ !== "11" ? 0 : 1;
+  return (
+    nonIntegerPartType === 0 
+      ? removeLastNSymbols(translated, 4) + "одна"
+      : translated
+    ) + ` ${getCategoryWordForNonIntegerPart(number.length, nonIntegerPartType)}` 
+}
+
 function wordFrom(number) {
   if(isNaN(parseFloat(number))) return;
-  if(typeof number !== "string" && !Number.isSafeInteger(number)) {
-    return `Passed number is not safe. \nAvailable numbers are digit numbers in range [${Number.MIN_SAFE_INTEGER}; ${Number.MAX_SAFE_INTEGER}] \n...or pass the number wrapped in quotes.`;
+  if(
+    typeof number !== "string" &&
+    (number > Number.MAX_SAFE_INTEGER || number < Number.MIN_SAFE_INTEGER)
+  ) {
+    return `Passed number is not safe. \nAvailable numbers are numbers in range [${Number.MIN_SAFE_INTEGER}; ${Number.MAX_SAFE_INTEGER}] \n...or pass the number wrapped in quotes.`;
   }
   number = number.toString();
 
@@ -75,6 +103,17 @@ function wordFrom(number) {
   if(number < 0) {
     return `минус ${wordFrom(number.slice(1))}`
   }
+  // Handling a non-integer.
+  if(number.split("").indexOf(".") !== -1) {
+    const [integerPart, nonIntegerPart] = number.split(".");
+    const nonInteger = translateNonIntegerPart(nonIntegerPart);
+    return wordFrom(integerPart) + " целых" + (
+      nonInteger !== ""
+        ? ` ${nonInteger}` 
+        : ""
+    )
+  }
+
   // Default...
   if(number < 100) {
     return translateNumberLessThan100(number)
