@@ -30,14 +30,14 @@ function getTranslatedNumberWithClassWord(number, class_) {
       return removeLastNSymbols(translatedNumber, 3) + "две тысячи"
     }
     // "Двадцать один миллион", BUT(!) "двадцать одна тысяча"
-    if(lastDigit === "1" && twoLastDigits(number) > "11") {
+    if(lastDigit === "1" && twoLastDigits(number) !== "11") {
       return removeLastNSymbols(translatedNumber, 4) + "одна тысяча"
     }
   } 
 
-  const translatedNumber = () => translateNumberLessThanThousand(number);
+  const translatedNumber = translateNumberLessThanThousand(number);
   const classWord = getClassWord(twoLastDigits(number), class_);
-  return `${translatedNumber()} ${classWord}`
+  return `${translatedNumber} ${classWord}`
 }
 
 module.exports = {
