@@ -1,4 +1,4 @@
-const { expectToBe } = require("./utils.js");
+const { expectToBe } = require("./utils");
 
 test("Цифры", () => {
   expectToBe(7, "семь");
@@ -34,7 +34,7 @@ test("Числа от 100 до 1000", () => {
 })
 
 test("Числа от 1000 до 10000", () => {
-  expectToBe(1000, "тысяча");
+  expectToBe(1000, "один тысяча"); 
   expectToBe(2152, "две тысячи сто пятьдесят два");
   expectToBe(3592, "три тысячи пятьсот девяносто два");
   expectToBe(9999, "девять тысяч девятьсот девяносто девять");
