@@ -1,6 +1,6 @@
 ;const { getClassWord, getCategoryWordForNonIntegerPart } = require("./numbers/word.specific.getters");
-const { translateNumberLessThanThousand } = require("./translaters/translate.small.numbers");
-const { getTranslatedNumberWithClassWord } = require("./translaters/translate.number.triplet");
+const { translateNumberLessThanThousand } = require("./translators/translate.small.numbers");
+const { getTranslatedNumberWithClassWord } = require("./translators/translate.number.triplet");
 const { twoLastDigits, removeLastNSymbols, numberIsNotSafe } = require("./utils/utils");
 const { getHundreds } = require("./numbers/word.primitive.getters");
 const { NonIntegers } = require("./constants/word.forms.const");
