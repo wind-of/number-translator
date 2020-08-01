@@ -21,10 +21,10 @@ function translateNumberLessThanThousand(number) {
   }
 
   const [firstDigit, ...rest] = number.split("");
-  const lastPart = translateNumberLessThanThousand(rest.join(""));
+  const lastPart = () => translateNumberLessThanThousand(rest.join(""));
   return Number(rest.join("")) === 0 
       ? getHundreds(firstDigit)
-      : `${getHundreds(firstDigit)} ${lastPart}`
+      : `${getHundreds(firstDigit)} ${lastPart()}`
 }
 
 module.exports = { translateNumberLessThanThousand }
