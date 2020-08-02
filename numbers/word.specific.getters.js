@@ -1,6 +1,7 @@
 const { classWords, nonIntegerPartCategories } = require("./word.forms");
 const { ClassPostfixes } = require("../constants/word.forms.const");
-const { twoLastDigits } = require("../utils/utils");
+const { twoLastDigits, removeLastNSymbols } = require("../utils/utils");
+const { inRange } = require("../utils/in-range");
 
 /**
  * @function getClassWord
@@ -13,24 +14,49 @@ const { twoLastDigits } = require("../utils/utils");
  * @return {String} A string value that is a special class word.
  */
 function getClassWord(number, classIndex) {
-  return classWords[classIndex][computePostfixIndex(number)]
+  return classIndex === 1 
+          ? computeWordForThousandsClass(number)
+          : classWords[classIndex] + computePostfixForNumber(number)
 }
+
 /**
- * @function computePostfix
- * Computes an index of the postfix for the passed number.
+ * @function computePostfixForNumber
+ * Computes a postfix of the passed number.
  * @param {String} number
  * String number.
  * 
  * @return {Number} Index of a certain postfix.
  */
-function computePostfixIndex(number) {
+function computePostfixForNumber(number) {
   const twoLastDigits_ = twoLastDigits(number);
   const lastDigit = twoLastDigits_[1] || twoLastDigits_[0];
-  const postfixArrays = Object.values(ClassPostfixes);
-
-  return ClassPostfixes.MANY_OR_ZERO_THINGS_POSTFIX.includes(twoLastDigits_)
-          ? postfixArrays.indexOf(ClassPostfixes.MANY_OR_ZERO_THINGS_POSTFIX)
-          : postfixArrays.findIndex(array => array.includes(lastDigit))
+  
+  if(inRange(twoLastDigits_, [11, 19]) || lastDigit === "0" || lastDigit > 4) {
+    return ClassPostfixes.MANY_OR_ZERO_THINGS_POSTFIX
+  }
+  if(lastDigit === "1") {
+    return ClassPostfixes.ONE_THING_POSTFIX
+  }
+  return ClassPostfixes.FEW_THINGS_POSTFIX
+}
+/** 
+ * @function computeWordForThousandsClass
+ * Computes class word of thousands' 
+ * @param {String} number
+ * String number.
+ * 
+ * @return {Number} Index of a certain postfix.
+*/
+function computeWordForThousandsClass(number) {
+  const twoLastDigits_ = twoLastDigits(number);
+  const lastDigit = twoLastDigits_[1] || twoLastDigits_[0];
+  if(lastDigit === "1") {
+    return "тысяча"
+  }
+  if(inRange(lastDigit, [2, 4]) && !inRange(twoLastDigits_, [12, 14])) {
+    return "тысячи"
+  }
+  return "тысяч"
 }
 
 function getCategoryWordForNonIntegerPart(category, type) {
