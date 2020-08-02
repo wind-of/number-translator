@@ -1,5 +1,5 @@
 const { classWords, nonIntegerPartCategories } = require("./word.forms");
-const { Classes } = require("../constants/word.forms.const");
+const { ClassPostfixes } = require("../constants/word.forms.const");
 const { twoLastDigits } = require("../utils/utils");
 
 /**
@@ -12,16 +12,25 @@ const { twoLastDigits } = require("../utils/utils");
  * 
  * @return {String} A string value that is a special class word.
  */
-function getClassWord(number, class_) {
+function getClassWord(number, classIndex) {
+  return classWords[classIndex][computePostfixIndex(number)]
+}
+/**
+ * @function computePostfix
+ * Computes an index of the postfix for the passed number.
+ * @param {String} number
+ * String number.
+ * 
+ * @return {Number} Index of a certain postfix.
+ */
+function computePostfixIndex(number) {
   const twoLastDigits_ = twoLastDigits(number);
   const lastDigit = twoLastDigits_[1] || twoLastDigits_[0];
-  const currentClass = classWords[class_];
-  
-  if(twoLastDigits_ < 20 && twoLastDigits_ > 10) return currentClass[Classes.MANY_OR_ZERO_THINGS];
-  if(lastDigit === "1") return currentClass[Classes.ONE_THING];
-  if(lastDigit < 5 && lastDigit > 1) return currentClass[Classes.FEW_THINGS];
+  const postfixArrays = Object.values(ClassPostfixes);
 
-  return currentClass[Classes.MANY_OR_ZERO_THINGS]
+  return ClassPostfixes.MANY_OR_ZERO_THINGS_POSTFIX.includes(twoLastDigits_)
+          ? postfixArrays.indexOf(ClassPostfixes.MANY_OR_ZERO_THINGS_POSTFIX)
+          : postfixArrays.findIndex(array => array.includes(lastDigit))
 }
 
 function getCategoryWordForNonIntegerPart(category, type) {
