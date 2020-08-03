@@ -59,8 +59,8 @@ function computeWordForThousandsClass(number) {
   return "тысяч"
 }
 
-function getCategoryWordForNonIntegerPart(category, type) {
-  return nonIntegerPartCategories[category][type]
+function getCategoryWordForNonIntegerPart(category) {
+  return nonIntegerPartCategories[category]
 }
 
 module.exports = {

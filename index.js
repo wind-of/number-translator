@@ -3,7 +3,7 @@ const { translateNumberLessThanThousand } = require("./translators/translate.sma
 const { getTranslatedNumberWithClassWord } = require("./translators/translate.number.triplet");
 const { twoLastDigits, removeLastNSymbols, numberIsNotSafe } = require("./utils/utils");
 const { getHundreds } = require("./numbers/word.primitive.getters");
-const { NonIntegers } = require("./constants/word.forms.const");
+const { NonIntegersPostfixes } = require("./constants/word.forms.const");
 const { errors } = require("./errors");
 
 function wordFrom(number) {
@@ -65,14 +65,14 @@ function translateNonIntegerPart(number) {
   const twoLastDigits_ = twoLastDigits(number);
   const lastDigit = twoLastDigits_[1] || twoLastDigits_[0];
   const nonIntegerPartType = lastDigit === "1" && twoLastDigits_ !== "11" 
-        ? NonIntegers.ENDS_WITH_ONE 
-        : NonIntegers.OTHERWISE;
+        ? NonIntegersPostfixes.ENDS_WITH_ONE 
+        : NonIntegersPostfixes.OTHERWISE;
 
   return (
-    nonIntegerPartType === NonIntegers.ENDS_WITH_ONE
+    nonIntegerPartType === NonIntegersPostfixes.ENDS_WITH_ONE
       ? removeLastNSymbols(translated, 4) + "одна"
       : translated
-    ) + ` ${getCategoryWordForNonIntegerPart(number.length, nonIntegerPartType)}` 
+    ) + ` ${getCategoryWordForNonIntegerPart(number.length)}` + nonIntegerPartType
 }
 
 module.exports = wordFrom
