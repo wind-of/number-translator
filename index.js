@@ -5,7 +5,7 @@ const { removeLastNSymbols } = require("./utils/remove-last-n-symbols");
 const { twoLastDigits } = require("./utils/two-last-digits");
 const { isSafeNumber } = require("./utils/is-safe-number");
 const { getHundreds } = require("./numbers/word.primitive.getters");
-const { NonIntegersPostfixes } = require("./constants/word.forms.const");
+const { NonIntegersPostfixes } = require("./constants/word.postfixes.const");
 const { errors } = require("./errors");
 
 function wordFrom(number) {
