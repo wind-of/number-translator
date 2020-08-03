@@ -8,7 +8,7 @@ const { getHundreds } = require("./numbers/word.primitive.getters");
 const { NonIntegersPostfixes } = require("./constants/word.postfixes.const");
 const { errors } = require("./errors");
 
-function wordFrom(number) {
+function translateNumber(number) {
   if(isNaN(parseFloat(number))) return errors.NotANumber;
   if(!isSafeNumber(number)) return errors.NotSafeNumber;
   number = number.toString();
@@ -63,7 +63,7 @@ function translateNonIntegerPart(number) {
   if(Number(number) === 0) {
     return ""
   }
-  const translated = wordFrom(number);
+  const translated = translateNumber(number);
   const twoLastDigits_ = twoLastDigits(number);
   const lastDigit = twoLastDigits_[1] || twoLastDigits_[0];
   const nonIntegerPartType = lastDigit === "1" && twoLastDigits_ !== "11" 
@@ -77,4 +77,4 @@ function translateNonIntegerPart(number) {
     ) + ` ${getCategoryWordForNonIntegerPart(number.length)}` + nonIntegerPartType
 }
 
-module.exports = wordFrom
+module.exports = translateNumber
