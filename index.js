@@ -77,4 +77,6 @@ function translateNonIntegerPart(number) {
     ) + ` ${getCategoryWordForNonIntegerPart(number.length)}` + nonIntegerPartType
 }
 
-module.exports = translateNumber
+module.exports = {
+  translateNumber
+}
