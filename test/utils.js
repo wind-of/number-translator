@@ -1,4 +1,5 @@
-const wordFrom = require("../index");
+const { translateNumber } = require("../index");
+
 module.exports = {
-  expectToBe: (argument, expected) => expect(wordFrom(argument)).toBe(expected)
+  expectToBe: (argument, expected) => expect(translateNumber(argument)).toBe(expected)
 }
