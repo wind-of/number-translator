@@ -15,15 +15,15 @@ function translateNumber(number) {
   
   // Negative handler.
   if(number < 0) {
-    return `минус ${wordFrom(number.slice(1))}`
+    return `минус ${translateNumber(number.slice(1))}`
   }
   // Non-integer handler.
   if(number.split("").indexOf(".") !== -1) {
     const [integerPart, nonIntegerPart] = number.split(".");
     const translatedNonIntegerPart = translateNonIntegerPart(nonIntegerPart);
     return translatedNonIntegerPart === "" 
-        ? wordFrom(integerPart)
-        :`${wordFrom(integerPart)} целых ${translatedNonIntegerPart}`
+        ? translateNumber(integerPart)
+        :`${translateNumber(integerPart)} целых ${translatedNonIntegerPart}`
   }
   // Default .
   if(number < 1000) {
