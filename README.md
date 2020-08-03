@@ -2,7 +2,7 @@
 
 ### How to use:
 
-    const translateNumber = require("number-translator");
+    const { translateNumber } = require("number-translator");
     
     console.log(translateNumber(123)) // —> "сто двадцать три"
     console.log(translateNumber("123")) // —> "сто двадцать три"
