@@ -1,6 +1,7 @@
 const { classWords, nonIntegerPartCategories } = require("./word.forms");
 const { ClassPostfixes } = require("../constants/word.forms.const");
-const { twoLastDigits, removeLastNSymbols } = require("../utils/utils");
+const { removeLastNSymbols } = require("../utils/remove-last-n-symbols");
+const { twoLastDigits } = require("../utils/two-last-digits");
 const { inRange } = require("../utils/in-range");
 
 /**

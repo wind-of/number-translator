@@ -1,5 +1,6 @@
-const { twoLastDigits, removeLastNSymbols } = require("../utils/utils");
 const { translateNumberLessThanThousand } = require("./translate.small.numbers");
+const { removeLastNSymbols } = require("../utils/remove-last-n-symbols");
+const { twoLastDigits } = require("../utils/two-last-digits");
 const { getClassWord } = require("../numbers/word.specific.getters");
 
 /**

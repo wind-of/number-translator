@@ -1,6 +1,6 @@
-const { digits, from10To19 } = require("../numbers/word.forms");
 const { getDigit, getDozens, getHundreds } = require("../numbers/word.primitive.getters");
-const { twoLastDigits } = require("../utils/utils");
+const { digits, from10To19 } = require("../numbers/word.forms");
+const { twoLastDigits } = require("../utils/two-last-digits");
 
 /**
  * @function translateNumberLessThanThousand

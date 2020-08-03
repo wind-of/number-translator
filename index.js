@@ -1,14 +1,16 @@
 ;const { getClassWord, getCategoryWordForNonIntegerPart } = require("./numbers/word.specific.getters");
 const { translateNumberLessThanThousand } = require("./translators/translate.small.numbers");
 const { getTranslatedNumberWithClassWord } = require("./translators/translate.number.triplet");
-const { twoLastDigits, removeLastNSymbols, numberIsNotSafe } = require("./utils/utils");
+const { removeLastNSymbols } = require("./utils/remove-last-n-symbols");
+const { twoLastDigits } = require("./utils/two-last-digits");
+const { isSafeNumber } = require("./utils/is-safe-number");
 const { getHundreds } = require("./numbers/word.primitive.getters");
 const { NonIntegersPostfixes } = require("./constants/word.forms.const");
 const { errors } = require("./errors");
 
 function wordFrom(number) {
   if(isNaN(parseFloat(number))) return errors.NotANumber;
-  if(numberIsNotSafe(number)) return errors.NotSafeNumber;
+  if(!isSafeNumber(number)) return errors.NotSafeNumber;
   number = number.toString();
   
   // Negative handler.
