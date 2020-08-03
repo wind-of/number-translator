@@ -31,17 +31,17 @@ function wordFrom(number) {
   }
 
   const translatedParts = [];
-  for(let class_ = 0;; class_++, number = removeLastNSymbols(number, 3)) {
+  for(let classIndex = 0;; classIndex++, number = removeLastNSymbols(number, 3)) {
     if(number.length < 4) {
-      const wordFromNumber = getTranslatedNumberWithClassWord(number, class_);
+      const wordFromNumber = getTranslatedNumberWithClassWord(number, classIndex);
       if(wordFromNumber !== "") {
         translatedParts.unshift(wordFromNumber)
       };
       break
     }
     const triplet = number.slice(number.length - 3, number.length);
-    const wordFromTriplet = getTranslatedNumberWithClassWord(triplet, class_);
-    if(class_ === 0 && wordFromTriplet === "ноль" && number.length > 3) {
+    const wordFromTriplet = getTranslatedNumberWithClassWord(triplet, classIndex);
+    if(classIndex === 0 && wordFromTriplet === "ноль" && number.length > 3) {
       continue
     }
     if(wordFromTriplet !== "") {

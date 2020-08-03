@@ -7,7 +7,7 @@ const { getClassWord } = require("../numbers/word.specific.getters");
  * @function getTranslatedNumberWithClassWord
  * @param {Number} number
  * A number with three or less digits. Example: "123", "21", "1", ...
- * @param {Number} class_
+ * @param {Number} classIndex
  * Position of the number in the source number. Example: 5765123321 => 5(3) 756(2) 123(1) 321(0)
  * 
  * @return {String} A word equivalent of the "number".
@@ -19,11 +19,11 @@ const { getClassWord } = require("../numbers/word.specific.getters");
  * @return {String} A word equivalent of the "number" with a corresponding to the class word.
  * @when Otherwise.
  */
-function getTranslatedNumberWithClassWord(number, class_) {
-  if(class_ === 0) return translateNumberLessThanThousand(number);
+function getTranslatedNumberWithClassWord(number, classIndex) {
+  if(classIndex === 0) return translateNumberLessThanThousand(number);
   if(Number(number) === 0) return "";
   
-  if(class_ === 1) {
+  if(classIndex === 1) {
     const lastDigit = number.split("").pop();
     const translatedNumber = translateNumberLessThanThousand(number);
     // "Два миллиона", BUT(!) "... две тысячи", 
@@ -37,7 +37,7 @@ function getTranslatedNumberWithClassWord(number, class_) {
   } 
 
   const translatedNumber = translateNumberLessThanThousand(number);
-  const classWord = getClassWord(twoLastDigits(number), class_);
+  const classWord = getClassWord(twoLastDigits(number), classIndex);
   return `${translatedNumber} ${classWord}`
 }
 

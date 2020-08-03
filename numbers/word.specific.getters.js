@@ -9,7 +9,7 @@ const { inRange } = require("../utils/in-range");
  * Gets a special word of some class of number. Example: "тысяча", "миллион", "квадрагинтиллион", ...
  * @param {String} number 
  * A string of numbers with three or less digits. Example: "123", "21", "1"...
- * @param {Number} class_ 
+ * @param {Number} classIndex 
  * Position of the number in the source number. Example: 5765123321 => 5(3) 756(2) 123(1) 321(0).
  * 
  * @return {String} A string value that is a special class word.
