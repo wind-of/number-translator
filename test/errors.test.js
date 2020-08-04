@@ -6,6 +6,17 @@ test("Non-numeric values", () => {
 })
 
 test("Unsafe numbers", () => {
-  [192530257132532235671230, 2197501242652579812918, 131515215215138398384438, 3168587878578921357231123, 215363246734587734623, 4326324634234234643263, 125784215140320521251, 215215220547513531515, 1e23]
-    .forEach(arg => expect(translateNumber(arg)).toBe(errors.NotSafeNumber))
+  expect(translateNumber(192530257132532235671230)).toBe(errors.NotSafeNumber);
+  expect(translateNumber(219750124265257981291812412)).toBe(errors.NotSafeNumber);
+  expect(translateNumber(13151521521513839838443821214)).toBe(errors.NotSafeNumber);
+  expect(translateNumber(3168587878578921357231121242143)).toBe(errors.NotSafeNumber);
+  expect(translateNumber(21536324673458773462214124214123)).toBe(errors.NotSafeNumber);
+})
+
+test("Non-numeric symbols", () => {
+  expect(translateNumber("2141221fa2412412")).toBe(errors.nonNumericSymbols);
+  expect(translateNumber("21421 fafa fa1412")).toBe(errors.nonNumericSymbols);
+  expect(translateNumber("1f")).toBe(errors.nonNumericSymbols);
+  expect(translateNumber(" 1 ")).toBe(errors.nonNumericSymbols);
+  expect(translateNumber("078*\/'].[],]]-+")).toBe(errors.nonNumericSymbols);
 })
