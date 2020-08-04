@@ -6,7 +6,16 @@
   "scripts": {
     "test": "jest"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wind-of/number-translator.git"
+  },
+  "keywords": [
+    "number",
+    "translator",
+    "number-translator"
+  ],
+  "author": "wind-of",
   "license": "ISC",
   "devDependencies": {
     "jest": "^26.1.0"
