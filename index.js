@@ -3,16 +3,14 @@ const { translateNumberLessThanThousand } = require("./translators/translate.sma
 const { getTranslatedNumberWithClassWord } = require("./translators/translate.number.triplet");
 const { removeLastNSymbols } = require("./utils/remove-last-n-symbols");
 const { twoLastDigits } = require("./utils/two-last-digits");
-const { isSafeNumber } = require("./utils/is-safe-number");
 const { getHundreds } = require("./numbers/word.primitive.getters");
 const { NonIntegersPostfixes } = require("./constants/word.postfixes.const");
-const { errors } = require("./errors");
+const { isValidNumber } = require("./validation/is-valid-number");
 
 function translateNumber(number) {
-  if(isNaN(parseFloat(number))) return errors.NotANumber;
-  if(!isSafeNumber(number)) return errors.NotSafeNumber;
+  const error = isValidNumber(number);
+  if(error) return error;
   number = number.toString();
-  if(/[^0-9.\-]/.test(number)) return errors.nonNumericSymbols;
   
   // Negative handler.
   if(number < 0) {

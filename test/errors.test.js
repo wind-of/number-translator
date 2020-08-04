@@ -1,5 +1,6 @@
 const { translateNumber } = require("../index");
-const { errors } = require("../errors");
+const { errors } = require("../validation/errors");
+
 test("Non-numeric values", () => {
   ["f", "", [], {}, null, NaN, undefined]
     .forEach(arg => expect(translateNumber(arg)).toBe(errors.NotANumber))
