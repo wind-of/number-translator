@@ -12,6 +12,7 @@ function translateNumber(number) {
   if(isNaN(parseFloat(number))) return errors.NotANumber;
   if(!isSafeNumber(number)) return errors.NotSafeNumber;
   number = number.toString();
+  if(/[^0-9.\-]/.test(number)) return errors.nonNumericSymbols;
   
   // Negative handler.
   if(number < 0) {
