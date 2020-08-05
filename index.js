@@ -6,11 +6,13 @@ const { twoLastDigits } = require("./utils/two-last-digits");
 const { getHundreds } = require("./numbers/word.primitive.getters");
 const { NonIntegersPostfixes } = require("./constants/word.postfixes.const");
 const { isValidNumber } = require("./validation/is-valid-number");
+const { normalizeNumber } = require("./utils/normalize.number");
+
 
 function translateNumber(number) {
   const error = isValidNumber(number);
   if(error) return error;
-  number = number.toString();
+  number = normalizeNumber(number.toString());
   
   // Negative handler.
   if(number < 0) {
