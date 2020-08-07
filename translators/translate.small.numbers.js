@@ -7,7 +7,6 @@ const { twoLastDigits } = require("../utils/two-last-digits");
  * Translates number that has less than four digits :/
  * @param {String} number 
  * A string of numbers with three or less digits. Example: "023", "201", "1"...
- * 
  * @return {String} Translated number.
  */
 function translateNumberLessThanThousand(number) {
@@ -21,10 +20,9 @@ function translateNumberLessThanThousand(number) {
   }
 
   const [firstDigit, ...rest] = number.split("");
-  const lastPart = () => translateNumberLessThanThousand(rest.join(""));
   return Number(rest.join("")) === 0 
       ? getHundreds(firstDigit)
-      : `${getHundreds(firstDigit)} ${lastPart()}`
+      : `${getHundreds(firstDigit)} ${translateNumberLessThanThousand(rest.join(""))}`
 }
 
 module.exports = { translateNumberLessThanThousand }

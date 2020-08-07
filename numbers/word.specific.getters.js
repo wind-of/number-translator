@@ -11,7 +11,6 @@ const { inRange } = require("../utils/in-range");
  * A string of numbers with three or less digits. Example: "123", "21", "1"...
  * @param {Number} classIndex 
  * Position of the number in the source number. Example: 5765123321 => 5(3) 756(2) 123(1) 321(0).
- * 
  * @return {String} A string value that is a special class word.
  */
 function getClassWord(number, classIndex) {
@@ -25,7 +24,6 @@ function getClassWord(number, classIndex) {
  * Computes a postfix of the passed number.
  * @param {String} number
  * String number.
- * 
  * @return {Number} Index of a certain postfix.
  */
 function computePostfixForNumber(number) {
@@ -45,7 +43,6 @@ function computePostfixForNumber(number) {
  * Computes class word of thousands' 
  * @param {String} number
  * String number.
- * 
  * @return {Number} Index of a certain postfix.
 */
 function computeWordForThousandsClass(number) {

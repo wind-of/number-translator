@@ -12,21 +12,21 @@ const { normalizeNumber } = require("./utils/normalize.number");
 function translateNumber(number) {
   const error = isValidNumber(number);
   if(error) return error;
+
   number = normalizeNumber(number.toString());
-  
-  // Negative handler.
+  // Negative.
   if(number < 0) {
     return `минус ${translateNumber(number.slice(1))}`
   }
-  // Non-integer handler.
-  if(number.split("").indexOf(".") !== -1) {
+  // Non-integer.
+  if(number.includes(".")) {
     const [integerPart, nonIntegerPart] = number.split(".");
     const translatedNonIntegerPart = translateNonIntegerPart(nonIntegerPart);
     return translatedNonIntegerPart === "" 
         ? translateNumber(integerPart)
         :`${translateNumber(integerPart)} целых ${translatedNonIntegerPart}`
   }
-  // Default .
+  // Default...
   if(number < 1000) {
     return translateNumberLessThanThousand(number)
   }
@@ -35,7 +35,7 @@ function translateNumber(number) {
   for(let classIndex = 0;; classIndex++, number = removeLastNSymbols(number, 3)) {
     if(number.length < 4) {
       const wordFromNumber = getTranslatedNumberWithClassWord(number, classIndex);
-      if(wordFromNumber !== "") {
+      if(wordFromNumber) {
         translatedParts.unshift(wordFromNumber)
       };
       break
@@ -45,7 +45,7 @@ function translateNumber(number) {
     if(classIndex === 0 && wordFromTriplet === "ноль" && number.length > 3) {
       continue
     }
-    if(wordFromTriplet !== "") {
+    if(wordFromTriplet) {
       translatedParts.unshift(wordFromTriplet)
     }
   }

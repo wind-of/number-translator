@@ -2,6 +2,7 @@ const { errors } = require("./errors");
 const { isSafeNumber } = require("../utils/is-safe-number");
 
 module.exports = {
+  // WRONG NAME! FOLLOW SRP! 
   isValidNumber(number) {
     let result = "";
     const predicates = [
