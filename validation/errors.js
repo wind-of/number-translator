@@ -6,4 +6,4 @@ You can pass the number wrapped in quotes to avoid this limitation.`,
   nonNumericSymbols: "There are non-numeric symbols in the passed string."
 }
 
-module.exports = { errors }
+module.exports = errors

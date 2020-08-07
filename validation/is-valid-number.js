@@ -1,4 +1,4 @@
-const { errors } = require("./errors");
+const { NotANumber, NotSafeNumber, nonNumericSymbols } = require("./errors");
 const { isSafeNumber } = require("../utils/is-safe-number");
 
 module.exports = {

@@ -1,6 +1,5 @@
 const { translateNumber } = require("../index");
-const { errors } = require("../validation/errors");
-const { NotANumber, NotSafeNumber, nonNumericSymbols } = errors;
+const { NotANumber, NotSafeNumber, nonNumericSymbols } = require("../validation/errors");
 
 test("Non-numeric values", () => {
   ["f", "", [], {}, null, NaN, undefined]
