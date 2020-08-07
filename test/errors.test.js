@@ -1,5 +1,5 @@
 const { translateNumber } = require("../index");
-const { NOT_A_NUMBER, NOT_SAFE_NUMBER, NON_NUMERIC_SYMBOLS } = require("../validation/errors");
+const { NOT_A_NUMBER, NOT_SAFE_NUMBER, NON_NUMERIC_SYMBOLS, EXTRA_SYMBOLS } = require("../validation/errors");
 
 test("Non-numeric values", () => {
   ["f", "", [], {}, null, NaN, undefined]
@@ -19,4 +19,11 @@ test("Non-numeric symbols", () => {
   expect(translateNumber("21421 fafa fa1412")).toBe(NON_NUMERIC_SYMBOLS);
   expect(translateNumber("078*\/'].[],]]-+")).toBe(NON_NUMERIC_SYMBOLS);
   expect(translateNumber("1f")).toBe(NON_NUMERIC_SYMBOLS);
+})
+
+test("Extra symbols", () => {
+  expect(translateNumber("22.2.212312321321")).toBe(EXTRA_SYMBOLS);
+  expect(translateNumber("-2222222-222222")).toBe(EXTRA_SYMBOLS);
+  expect(translateNumber("-222.-22.22")).toBe(EXTRA_SYMBOLS);
+  expect(translateNumber("2222.2222.222.222.22.2.2-22.22.2.2-")).toBe(EXTRA_SYMBOLS);
 })

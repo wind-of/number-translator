@@ -4,6 +4,7 @@ const errors = {
   You can pass the number wrapped in quotes to avoid this limitation.`,
   NOT_A_NUMBER: "Passed value is not a number.",
   NON_NUMERIC_SYMBOLS: "There are non-numeric symbols in the passed string.",
+  EXTRA_SYMBOLS: "Passed number isn't a valid number."
 }
 
 module.exports = errors
