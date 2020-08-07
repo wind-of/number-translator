@@ -5,12 +5,12 @@ const { removeLastNSymbols } = require("./utils/remove-last-n-symbols");
 const { twoLastDigits } = require("./utils/two-last-digits");
 const { getHundreds } = require("./numbers/word.primitive.getters");
 const { NonIntegersPostfixes } = require("./constants/word.postfixes.const");
-const { isValidNumber } = require("./validation/is-valid-number");
+const { findError } = require("./validation/is-valid-number");
 const { normalizeNumber } = require("./utils/normalize.number");
 
 
 function translateNumber(number) {
-  const error = isValidNumber(number);
+  const error = findError(number);
   if(error) return error;
 
   number = normalizeNumber(number.toString());

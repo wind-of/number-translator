@@ -2,15 +2,15 @@ const { NotANumber, NotSafeNumber, nonNumericSymbols } = require("./errors");
 const { isSafeNumber } = require("../utils/is-safe-number");
 
 module.exports = {
-  // WRONG NAME! FOLLOW SRP! 
-  isValidNumber(number) {
-    let result = "";
+  findError(number) {
     const predicates = [
-      [number => isNaN(parseFloat(number)), errors.NotANumber],
-      [number => !isSafeNumber(number), errors.NotSafeNumber],
-      [number => /[^0-9.\-]/.test(number.toString()), errors.nonNumericSymbols]
+      { isInvalid: number => isNaN(parseFloat(number)), message: NotANumber },
+      { isInvalid: number => !isSafeNumber(number), message: NotSafeNumber },
+      { isInvalid: number => /[^0-9.\-]/.test(number.toString()), message: nonNumericSymbols }
     ]
-    predicates.some(([predicate, error]) => predicate(number) ? (result = error, true) : false)
-    return result
+    const error = predicates.find(({ isInvalid }) => isInvalid(number))
+    if(error !== undefined) {
+      return error.message
+    }
   }
 }
