@@ -1,5 +1,5 @@
 ;const { getClassWord, getCategoryWordForNonIntegerPart } = require("./numbers/word.specific.getters");
-const { translateNumberLessThanThousand } = require("./translators/translate.small.numbers");
+const { translateThreeOrLessDigitNumber } = require("./translators/translate.small.number");
 const { getTranslatedNumberWithClassWord } = require("./translators/translate.number.triplet");
 const { removeLastNSymbols } = require("./utils/remove-last-n-symbols");
 const { twoLastDigits } = require("./utils/two-last-digits");
@@ -28,7 +28,7 @@ function translateNumber(number) {
   }
   // Default...
   if(number < 1000) {
-    return translateNumberLessThanThousand(number)
+    return translateThreeOrLessDigitNumber(number)
   }
 
   const translatedParts = [];
