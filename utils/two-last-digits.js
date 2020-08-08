@@ -1,5 +1,5 @@
 module.exports = {
-  twoLastDigits(number) {
-    return number.toString().split("").slice(number.length - 2).join("")
+  lastTwoChars(string) {
+    return string.split("").slice(string.length - 2).join("")
   }
 }

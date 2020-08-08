@@ -1,6 +1,6 @@
 const { getDigit, getDozens, getHundreds } = require("../numbers/word.primitive.getters");
 const { digits, from10To19 } = require("../numbers/word.forms");
-const { twoLastDigits } = require("../utils/two-last-digits");
+const { lastTwoChars } = require("../utils/two-last-digits");
 
 /**
  * @function translateThreeOrLessDigitNumber
@@ -13,7 +13,7 @@ function translateThreeOrLessDigitNumber(number) {
   if(number < 10) return getDigit(Number(number));
   if(number < 20) return from10To19[number - 10];
   if(number < 100) {
-    const [dozen, digit] = twoLastDigits(number);
+    const [dozen, digit] = lastTwoChars(number);
     return Number(digit) === 0 
         ? getDozens(dozen)
         : `${getDozens(dozen)} ${getDigit(digit)}`

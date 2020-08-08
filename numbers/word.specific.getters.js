@@ -1,7 +1,7 @@
 const { classWords, nonIntegerPartCategories } = require("./word.forms");
 const { ClassPostfixes } = require("../constants/word.postfixes.const");
 const { removeLastNSymbols } = require("../utils/remove-last-n-symbols");
-const { twoLastDigits } = require("../utils/two-last-digits");
+const { lastTwoChars } = require("../utils/two-last-digits");
 const { inRange } = require("../utils/in-range");
 
 /**
@@ -27,10 +27,10 @@ function getClassWord(number, classIndex) {
  * @return {Number} Index of a certain postfix.
  */
 function computePostfixForNumber(number) {
-  const twoLastDigits_ = twoLastDigits(number);
-  const lastDigit = twoLastDigits_[1] || twoLastDigits_[0];
+  const lastTwoDigits = lastTwoChars(number);
+  const lastDigit = lastTwoDigits[1] || lastTwoDigits[0];
   
-  if(inRange(twoLastDigits_, [11, 19]) || lastDigit === "0" || lastDigit > 4) {
+  if(inRange(lastTwoDigits, [11, 19]) || lastDigit === "0" || lastDigit > 4) {
     return ClassPostfixes.MANY_OR_ZERO_THINGS_POSTFIX
   }
   if(lastDigit === "1") {
@@ -46,12 +46,12 @@ function computePostfixForNumber(number) {
  * @return {Number} Index of a certain postfix.
 */
 function computeWordForThousandsClass(number) {
-  const twoLastDigits_ = twoLastDigits(number);
-  const lastDigit = twoLastDigits_[1] || twoLastDigits_[0];
+  const lastTwoDigits = lastTwoChars(number);
+  const lastDigit = lastTwoDigits[1] || lastTwoDigits[0];
   if(lastDigit === "1") {
     return "тысяча"
   }
-  if(inRange(lastDigit, [2, 4]) && !inRange(twoLastDigits_, [12, 14])) {
+  if(inRange(lastDigit, [2, 4]) && !inRange(lastTwoDigits, [12, 14])) {
     return "тысячи"
   }
   return "тысяч"

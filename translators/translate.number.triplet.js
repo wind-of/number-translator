@@ -1,6 +1,6 @@
 const { translateThreeOrLessDigitNumber } = require("./translate.small.number");
 const { removeLastNSymbols } = require("../utils/remove-last-n-symbols");
-const { twoLastDigits } = require("../utils/two-last-digits");
+const { lastTwoChars } = require("../utils/two-last-digits");
 const { getClassWord } = require("../numbers/word.specific.getters");
 
 /**
@@ -21,16 +21,16 @@ function getTranslatedNumberWithClassWord(number, classIndex) {
     const lastDigit = number.split("").pop();
     const translatedNumber = translateThreeOrLessDigitNumber(number);
     // "... две тысячи".
-    if(lastDigit === "2" && twoLastDigits(number) !== "12") {
+    if(lastDigit === "2" && lastTwoChars(number) !== "12") {
       return removeLastNSymbols(translatedNumber, 3) + "две тысячи"
     }
     // "... одна тысяча".
-    if(lastDigit === "1" && twoLastDigits(number) !== "11") {
+    if(lastDigit === "1" && lastTwoChars(number) !== "11") {
       return removeLastNSymbols(translatedNumber, 4) + "одна тысяча"
     }
   } 
 
-  return `${translateThreeOrLessDigitNumber(number)} ${getClassWord(twoLastDigits(number), classIndex)}`
+  return `${translateThreeOrLessDigitNumber(number)} ${getClassWord(lastTwoChars(number), classIndex)}`
 }
 
 module.exports = {

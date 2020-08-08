@@ -1,16 +1,16 @@
 function prepareNumber(number) {
   number = number.toString();
-  if(stringNumber.includes(".")) {
-    const [integer, nonInteger] = stringNumber.split(".");
+  if(number.includes(".")) {
+    const [integer, nonInteger] = number.split(".");
     return `${prepareNumber(integer)}.${nonInteger}`
   }
-  if(Number(stringNumber) === 0) {
+  if(Number(number) === 0) {
     return "0"
   }
-  while(stringNumber[0] === "0") {
-    stringNumber = stringNumber.slice(1)
+  while(number[0] === "0") {
+    number = number.slice(1)
   }
-  return stringNumber
+  return number
 }
 
 module.exports = {

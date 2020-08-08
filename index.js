@@ -2,7 +2,7 @@
 const { translateThreeOrLessDigitNumber } = require("./translators/translate.small.number");
 const { getTranslatedNumberWithClassWord } = require("./translators/translate.number.triplet");
 const { removeLastNSymbols } = require("./utils/remove-last-n-symbols");
-const { twoLastDigits } = require("./utils/two-last-digits");
+const { lastTwoChars } = require("./utils/two-last-digits");
 const { getHundreds } = require("./numbers/word.primitive.getters");
 const { NonIntegersPostfixes } = require("./constants/word.postfixes.const");
 const { findError } = require("./validation/is-valid-number");
@@ -65,9 +65,9 @@ function translateNonIntegerPart(number) {
     return ""
   }
   const translated = translateNumber(number);
-  const twoLastDigits_ = twoLastDigits(number);
-  const lastDigit = twoLastDigits_[1] || twoLastDigits_[0];
-  const nonIntegerPartType = lastDigit === "1" && twoLastDigits_ !== "11" 
+  const lastToDigits = lastTwoChars(number);
+  const lastDigit = lastToDigits[1] || lastToDigits[0];
+  const nonIntegerPartType = lastDigit === "1" && lastToDigits !== "11" 
       ? NonIntegersPostfixes.ENDS_WITH_ONE 
       : NonIntegersPostfixes.OTHERWISE;
 
