@@ -6,14 +6,14 @@ const { twoLastDigits } = require("./utils/two-last-digits");
 const { getHundreds } = require("./numbers/word.primitive.getters");
 const { NonIntegersPostfixes } = require("./constants/word.postfixes.const");
 const { findError } = require("./validation/is-valid-number");
-const { normalizeNumber } = require("./utils/normalize.number");
+const { prepareNumber } = require("./utils/prepare-number");
 
 
 function translateNumber(number) {
   const error = findError(number);
   if(error) return error;
 
-  number = normalizeNumber(number.toString());
+  number = prepareNumber(number);
   // Negative.
   if(number < 0) {
     return `минус ${translateNumber(number.slice(1))}`
@@ -37,7 +37,7 @@ function translateNumber(number) {
       const wordFromNumber = getTranslatedNumberWithClassWord(number, classIndex);
       if(wordFromNumber) {
         translatedParts.unshift(wordFromNumber)
-      };
+      }
       break
     }
     const triplet = number.slice(number.length - 3, number.length);
@@ -68,8 +68,8 @@ function translateNonIntegerPart(number) {
   const twoLastDigits_ = twoLastDigits(number);
   const lastDigit = twoLastDigits_[1] || twoLastDigits_[0];
   const nonIntegerPartType = lastDigit === "1" && twoLastDigits_ !== "11" 
-        ? NonIntegersPostfixes.ENDS_WITH_ONE 
-        : NonIntegersPostfixes.OTHERWISE;
+      ? NonIntegersPostfixes.ENDS_WITH_ONE 
+      : NonIntegersPostfixes.OTHERWISE;
 
   return (
     nonIntegerPartType === NonIntegersPostfixes.ENDS_WITH_ONE

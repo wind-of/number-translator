@@ -15,8 +15,8 @@ const { inRange } = require("../utils/in-range");
  */
 function getClassWord(number, classIndex) {
   return classIndex === 1 
-          ? computeWordForThousandsClass(number)
-          : classWords[classIndex] + computePostfixForNumber(number)
+      ? computeWordForThousandsClass(number)
+      : classWords[classIndex] + computePostfixForNumber(number)
 }
 
 /**

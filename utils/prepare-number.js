@@ -1,7 +1,8 @@
-function normalizeNumber(stringNumber) {
+function prepareNumber(number) {
+  number = number.toString();
   if(stringNumber.includes(".")) {
     const [integer, nonInteger] = stringNumber.split(".");
-    return `${normalizeNumber(integer)}.${nonInteger}`
+    return `${prepareNumber(integer)}.${nonInteger}`
   }
   if(Number(stringNumber) === 0) {
     return "0"
@@ -13,5 +14,5 @@ function normalizeNumber(stringNumber) {
 }
 
 module.exports = {
-  normalizeNumber
+  prepareNumber
 }
