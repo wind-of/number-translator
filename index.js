@@ -41,7 +41,7 @@ function translateNumber(number) {
     }
     const triplet = number.slice(number.length - 3, number.length);
     const wordFromTriplet = getTranslatedNumberWithClassWord(triplet, classIndex);
-    if(classIndex === 0 && wordFromTriplet === "ноль" && number.length > 3) {
+    if(classIndex === 0 && wordFromTriplet === "ноль") {
       continue
     }
     if(wordFromTriplet) {
