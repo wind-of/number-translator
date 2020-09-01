@@ -64,7 +64,7 @@ function translateNonIntegerPart(number) {
     return ""
   }
   const translated = translateNumber(number);
-  const lastToDigits = lastTwoChars(number);
+  const lastTwoDigits = lastTwoChars(number);
   const lastDigit = lastTwoDigits[1] || lastTwoDigits[0];
   const nonIntegerPartType = lastDigit === "1" && lastTwoDigits !== "11" 
       ? NonIntegersPostfixes.ENDS_WITH_ONE 
