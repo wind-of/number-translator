@@ -17,15 +17,21 @@ function translateNumber(number) {
   if(number < 0) {
     return `минус ${translateNumber(number.slice(1))}`
   }
-  // Non-integer.
+  
   if(number.includes(".")) {
     const [integerPart, nonIntegerPart] = number.split(".");
+    const integerPartTranslation = translateNumber(integerPart);
     const translatedNonIntegerPart = translateNonIntegerPart(nonIntegerPart);
-    return translatedNonIntegerPart === "" 
-        ? translateNumber(integerPart)
-        :`${translateNumber(integerPart)} целых ${translatedNonIntegerPart}`
+    const integerPartEndsWithOne = integerPartTranslation.substring(integerPartTranslation.length - 4) === "один"
+    if(translatedNonIntegerPart === "") {
+      return integerPartTranslation
+    }
+    if(integerPartEndsWithOne) {
+      return `${integerPartTranslation.substring(0, integerPartTranslation.length - 2) + "на"} целая ${translatedNonIntegerPart}`
+    }
+    return `${integerPartTranslation} целых ${translatedNonIntegerPart}`
   }
-  // Default...
+
   if(number < 1000) {
     return translateThreeOrLessDigitNumber(number)
   }
