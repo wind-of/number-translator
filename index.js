@@ -12,11 +12,13 @@ function translateNumber(number) {
   const error = findError(number);
   if(error) return error;
 
-  number = prepareNumber(number);
-  // Negative.
+  // Negative
   if(number < 0) {
-    return `минус ${translateNumber(number.slice(1))}`
+    return `минус ${translateNumber(number.toString().slice(1))}`
   }
+
+  number = prepareNumber(number);
+  
   
   if(number.includes(".")) {
     const [integerPart, nonIntegerPart] = number.split(".");
@@ -89,6 +91,8 @@ function translateNonIntegerPart(number) {
       : translated
     ) + ` ${getCategoryWordForNonIntegerPart(number.length)}` + nonIntegerPartType
 }
+
+console.log(translateNumber(-0.3))
 
 module.exports = {
   translateNumber
