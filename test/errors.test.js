@@ -15,8 +15,7 @@ test("Unsafe numbers", () => {
 })
 
 test("Non-numeric symbols", () => {
-  expect(translateNumber("2141221fa2412412")).toBe(NON_NUMERIC_SYMBOLS);
-  expect(translateNumber("21421 fafa fa1412")).toBe(NON_NUMERIC_SYMBOLS);
+  expect(translateNumber("21412f212412412")).toBe(NON_NUMERIC_SYMBOLS);
   expect(translateNumber("078*\/'].[],]]-+")).toBe(NON_NUMERIC_SYMBOLS);
   expect(translateNumber("1f")).toBe(NON_NUMERIC_SYMBOLS);
 })
