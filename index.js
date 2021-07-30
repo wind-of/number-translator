@@ -69,6 +69,13 @@ function translateNonIntegerPart(number) {
   if(Number(number) === 0) {
     return ""
   }
+
+  // 0.1000 === 0.1
+  for(let i = number.length - 1; number[i] === "0"; i--)
+    if(number[i - 1] !== "0")
+      number = number.substring(0, i)
+  
+
   const translated = translateNumber(number);
   const lastTwoDigits = lastTwoChars(number);
   const lastDigit = lastTwoDigits[1] || lastTwoDigits[0];
