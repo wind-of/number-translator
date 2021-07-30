@@ -7,9 +7,9 @@ function prepareNumber(number) {
   if(Number(number) === 0) {
     return "0"
   }
-  while(number[0] === "0") {
-    number = number.slice(1)
-  }
+  for(let i = 0; i < number.length && number[0] === "0"; i++)
+    if(number[i] !== "0")
+      number = number.slice(i)
   return number
 }
 
