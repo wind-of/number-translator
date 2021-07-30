@@ -4,7 +4,7 @@
 ```javascript
     const { translateNumber } = require("number-translator");
     
-    translateNumber(x)        // where x is null OR number OR (empty) string of numbers.
+    translateNumber(x)        // where x is number OR (empty) string of numbers.
     translateNumber(123)      // —> "сто двадцать три"
     translateNumber("123")    // —> "сто двадцать три"
     translateNumber(-1.23)    // —> "минус одна целая двадцать три сотых"
