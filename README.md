@@ -35,7 +35,7 @@ Then, if the passed value is a number (not a string of numbers) that is not from
 translateNumber(13151521521513839838443821214); // —> "Passed number is not safe. Safe numbers are numbers in range [-9007199254740991; 9007199254740991]. You can pass the number wrapped in quotes to avoid this limitation."
 ```
 #### Non-numeric symbols
-Any characters except of digits, "-" and "." causes a return of a [NON_NUMERIC_SYMBOLS]-error.
+Any character except of digits, "-" and "." causes a return of a [NON_NUMERIC_SYMBOLS]-error.
 
 ```javascript
 translateNumber("21412f212412412"); // —> "There are non-numeric symbols in the passed string."
@@ -45,6 +45,12 @@ If there are more than one of "-" or ".", then it returns an [EXTRA_SYMBOLS]-err
 
 ```javascript
 translateNumber("-2222222-222222"); // —> "Passed number is not a valid number."
+```
+#### Too big number
+If the number is out of the limits, then it returns a [TOO_BIG_NUMBER]-error.
+
+```javascript
+translateNumber("1".repeat(307)); // —> "Passed number is not a valid number."
 ```
 ---
 ### Live demo: 
