@@ -12,7 +12,6 @@ function translateNumber(number) {
   const error = findError(number);
   if(error) return error;
 
-  // Negative
   if(number < 0) {
     return `минус ${translateNumber(number.toString().slice(1))}`
   }
@@ -72,11 +71,9 @@ function translateNonIntegerPart(number) {
     return ""
   }
 
-  // 0.1000 === 0.1
   for(let i = number.length - 1; number[i] === "0"; i--)
     if(number[i - 1] !== "0")
       number = number.substring(0, i)
-  
 
   const translated = translateNumber(number);
   const lastTwoDigits = lastTwoChars(number);
