@@ -21,7 +21,7 @@ Range: [-10<sup>306</sup> + 10<sup>-305</sup>, 10<sup>306</sup> - 10<sup>-305</s
 ## Errors
 Every input passes the next tests in the same order before translating.
 #### Not a number
-Next values cause a throw of [NOT_A_NUMBER]-error: empty value (nothing is passed), empty string (""), [], {}, null, NaN, undefined 
+Next values cause a return of [NOT_A_NUMBER]-error: empty value (nothing is passed), empty string (""), [], {}, null, NaN, undefined 
 Also, if input is a string where the first symbol is not a number, function will return a [NOT_A_NUMBER]-error.
 
 ```javascript
@@ -29,7 +29,7 @@ translateNumber(); // —> "Passed value is not a number."
 ```
 
 #### Not safe number
-Then, if passed number is not from range [-9007199254740991; 9007199254740991], it causes a [NOT_SAFE_NUMBER]-error return.
+Then, if the passed value is a number (not a string of numbers) that is not from the range [-9007199254740991; 9007199254740991], it causes a return of the [NOT_SAFE_NUMBER]-error.
 
 ```javascript
 translateNumber(13151521521513839838443821214); // —> "Passed number is not safe. Safe numbers are numbers in range [-9007199254740991; 9007199254740991]. You can pass the number wrapped in quotes to avoid this limitation."
