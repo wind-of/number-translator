@@ -17,6 +17,7 @@ test("Non-numeric symbols", () => {
 })
 
 test("Extra symbols", () => {
+  expect(translateNumber("22-22")).toBe(EXTRA_SYMBOLS);
   expect(translateNumber("22.2.212312321321")).toBe(EXTRA_SYMBOLS);
   expect(translateNumber("-2222222-222222")).toBe(EXTRA_SYMBOLS);
 })
