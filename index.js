@@ -4,13 +4,15 @@ const { getTranslatedNumberWithClassWord } = require("./translators/translate.nu
 const { removeLastNSymbols } = require("./utils/remove-last-n-symbols");
 const { lastTwoChars } = require("./utils/two-last-digits");
 const { NonIntegersPostfixes } = require("./constants/word.postfixes.const");
+const { OUTPUT_TYPE_ERROR, OUTPUT_TYPE_VALID } = require("./constants/output.types")
 const { findError } = require("./validation/is-valid-number");
 const { prepareNumber } = require("./utils/prepare-number");
 
+const output = (message, type) => ({message, type})
 
 function translateNumber(number) {
   const error = findError(number);
-  if(error) return error;
+  if(error) return output(error, OUTPUT_TYPE_ERROR)
 
   if(number < 0) {
     return `минус ${translateNumber(number.toString().slice(1))}`
@@ -90,5 +92,8 @@ function translateNonIntegerPart(number) {
 }
 
 module.exports = {
-  translateNumber
+  translateNumber: (input) => {
+    const output_ = translateNumber(input)
+    return output_.message ? output_ : output(output_, OUTPUT_TYPE_VALID) 
+  }
 }

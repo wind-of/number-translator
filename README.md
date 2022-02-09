@@ -10,6 +10,19 @@
     translateNumber(-1.23)    // —> "минус одна целая двадцать три сотых"
     translateNumber(2231.1)   // —> "две тысяча двести тридцать одна целая одна десятая"
 ```
+## Breaking change in 2.0.0
+`translateNumber` returns an object with two properties — `type` and `message`. This was done in order to distinct if input was valid or not.
+```javascript
+    const { translateNumber } = require("number-translator");
+    
+    translateNumber(x)        // where x is number OR string of numbers.
+    translateNumber(123)      // —> {message: "сто двадцать три", type: "valid"}
+    translateNumber("123")    // —> {message: "сто двадцать три", type: "valid"}
+    translateNumber(-1.23)    // —> {message: "минус одна целая двадцать три сотых", type: "valid"}
+    translateNumber(2231.1)   // —> {message: "две тысяча двести тридцать одна целая одна десятая", type: "valid"}
+    translateNumber("22.31.1")   // —> {message: /* EXTRA_SYMBOLS_ERROR */, type: "error"}
+```
+
 ## Limits
 #### Integer
 Range: [-10<sup>306</sup> + 1, 10<sup>306</sup> - 1]
