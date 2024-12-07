@@ -2,6 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm run build
-git add .
+git add ./dist
 npm run test
-npx lint-staged --allow-empty
+npx lint-staged
