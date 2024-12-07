@@ -3,4 +3,4 @@
 
 npm run build
 git add .
-npx lint-staged
+npx lint-staged --allow-empty
