@@ -1,12 +1,10 @@
 import { getCategoryWordForNonIntegerPart } from "./numbers/word.specific.getters"
 import { translateThreeOrLessDigitNumber } from "./translators/translate.small.number"
 import { getTranslatedNumberWithClassWord } from "./translators/translate.number.triplet"
-import { removeLastNSymbols } from "./utils/remove-last-n-symbols"
-import { lastTwoChars } from "./utils/two-last-digits"
+import { removeLastNSymbols, getLastTwoChars, formatNumberBeforeTranslation } from "./utils"
 import { NonIntegersPostfixesEnum } from "./types"
 import { OutputTypesEnum } from "./types"
 import { findError } from "./validation/is-valid-number"
-import { prepareNumber } from "./utils/prepare-number"
 import { NOT_A_NUMBER } from "./constants/errors"
 
 const output = (message: string, type: string) => ({ message, type })
@@ -16,7 +14,7 @@ function translateNumberSource(number: string): string {
     return `минус ${translateNumberSource(number.toString().slice(1))}`
   }
 
-  number = prepareNumber(number)
+  number = formatNumberBeforeTranslation(number)
 
   if (number.includes(".")) {
     const [integerPart, nonIntegerPart] = number.split(".")
@@ -75,7 +73,7 @@ function translateNonIntegerPart(number: string): string {
     if (number[i - 1] !== "0") number = number.substring(0, i)
 
   const translated = translateNumberSource(number)
-  const lastTwoDigits = lastTwoChars(number)
+  const lastTwoDigits = getLastTwoChars(number)
   const lastDigit = lastTwoDigits[1] || lastTwoDigits[0]
   const nonIntegerPartType =
     lastDigit === "1" && lastTwoDigits !== "11"

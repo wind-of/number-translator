@@ -6,8 +6,7 @@ exports.computeWordForThousandsClass = computeWordForThousandsClass
 exports.getCategoryWordForNonIntegerPart = getCategoryWordForNonIntegerPart
 const word_forms_1 = require("../constants/word.forms")
 const types_1 = require("../types")
-const two_last_digits_1 = require("../utils/two-last-digits")
-const in_range_1 = require("../utils/in-range")
+const utils_1 = require("../utils")
 /**
  * @function getClassWord
  * Gets a special word of some class of number. Example: "тысяча", "миллион", "квадрагинтиллион", ...
@@ -30,10 +29,10 @@ function getClassWord(number, classIndex) {
  * @return {Number} Index of a certain postfix.
  */
 function computePostfixForNumber(number) {
-  const lastTwoDigits = (0, two_last_digits_1.lastTwoChars)(number)
+  const lastTwoDigits = (0, utils_1.getLastTwoChars)(number)
   const lastDigit = lastTwoDigits[1] || lastTwoDigits[0]
   if (
-    (0, in_range_1.inRange)(Number(lastTwoDigits), [11, 19]) ||
+    (0, utils_1.isNumberInRange)(Number(lastTwoDigits), [11, 19]) ||
     lastDigit === "0" ||
     Number(lastDigit) > 4
   ) {
@@ -52,14 +51,14 @@ function computePostfixForNumber(number) {
  * @return {Number} Index of a certain postfix.
  */
 function computeWordForThousandsClass(number) {
-  const lastTwoDigits = (0, two_last_digits_1.lastTwoChars)(number)
+  const lastTwoDigits = (0, utils_1.getLastTwoChars)(number)
   const lastDigit = lastTwoDigits[1] || lastTwoDigits[0]
   if (lastDigit === "1") {
     return "тысяча"
   }
   if (
-    (0, in_range_1.inRange)(lastDigit, [2, 4]) &&
-    !(0, in_range_1.inRange)(lastTwoDigits, [12, 14])
+    (0, utils_1.isNumberInRange)(lastDigit, [2, 4]) &&
+    !(0, utils_1.isNumberInRange)(lastTwoDigits, [12, 14])
   ) {
     return "тысячи"
   }

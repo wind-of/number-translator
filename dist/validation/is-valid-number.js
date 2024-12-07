@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true })
 exports.findError = findError
 const errors_1 = require("../constants/errors")
-const is_safe_number_1 = require("../utils/is-safe-number")
+const utils_1 = require("../utils")
 function findError(number) {
   var _a
   const predicates = [
@@ -11,7 +11,7 @@ function findError(number) {
       message: errors_1.NOT_A_NUMBER,
     },
     {
-      isInvalid: (number) => !(0, is_safe_number_1.isSafeNumber)(number),
+      isInvalid: (number) => !(0, utils_1.isNumberInSafeBound)(number),
       message: errors_1.NOT_SAFE_NUMBER,
     },
     {

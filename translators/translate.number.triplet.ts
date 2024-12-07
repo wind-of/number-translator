@@ -1,6 +1,5 @@
 import { getClassWord } from "../numbers/word.specific.getters"
-import { lastTwoChars } from "../utils/two-last-digits"
-import { removeLastNSymbols } from "../utils/remove-last-n-symbols"
+import { getLastTwoChars, removeLastNSymbols } from "../utils"
 import { translateThreeOrLessDigitNumber } from "./translate.small.number"
 
 /**
@@ -21,14 +20,14 @@ export function getTranslatedNumberWithClassWord(number: string, classIndex: num
     const lastDigit = number.split("").pop()
     const translatedNumber = translateThreeOrLessDigitNumber(number)
     // "... две тысячи".
-    if (lastDigit === "2" && lastTwoChars(number) !== "12") {
+    if (lastDigit === "2" && getLastTwoChars(number) !== "12") {
       return removeLastNSymbols(translatedNumber, 3) + "две тысячи"
     }
     // "... одна тысяча".
-    if (lastDigit === "1" && lastTwoChars(number) !== "11") {
+    if (lastDigit === "1" && getLastTwoChars(number) !== "11") {
       return removeLastNSymbols(translatedNumber, 4) + "одна тысяча"
     }
   }
 
-  return `${translateThreeOrLessDigitNumber(number)} ${getClassWord(lastTwoChars(number), classIndex)}`
+  return `${translateThreeOrLessDigitNumber(number)} ${getClassWord(getLastTwoChars(number), classIndex)}`
 }

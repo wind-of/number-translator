@@ -5,7 +5,7 @@ import {
   EXTRA_SYMBOLS,
   TOO_BIG_NUMBER,
 } from "../constants/errors"
-import { isSafeNumber } from "../utils/is-safe-number"
+import { isNumberInSafeBound } from "../utils"
 
 export function findError(number: string | number): string {
   const predicates = [
@@ -13,7 +13,10 @@ export function findError(number: string | number): string {
       isInvalid: (number: string | number) => isNaN(parseFloat(number.toString())),
       message: NOT_A_NUMBER,
     },
-    { isInvalid: (number: string | number) => !isSafeNumber(number), message: NOT_SAFE_NUMBER },
+    {
+      isInvalid: (number: string | number) => !isNumberInSafeBound(number),
+      message: NOT_SAFE_NUMBER,
+    },
     {
       isInvalid: (number: string | number) => /[^0-9.\-]/.test(number.toString()),
       message: NON_NUMERIC_SYMBOLS,

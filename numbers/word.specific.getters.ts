@@ -1,7 +1,6 @@
 import { CLASS_WORDS, NON_INTEGER_PART_CATEGORIES } from "../constants/word.forms"
 import { ClassPostfixesEnum } from "../types"
-import { lastTwoChars } from "../utils/two-last-digits"
-import { inRange } from "../utils/in-range"
+import { getLastTwoChars, isNumberInRange } from "../utils"
 
 /**
  * @function getClassWord
@@ -26,10 +25,14 @@ export function getClassWord(number: string, classIndex: number): string {
  * @return {Number} Index of a certain postfix.
  */
 export function computePostfixForNumber(number: string): string {
-  const lastTwoDigits = lastTwoChars(number)
+  const lastTwoDigits = getLastTwoChars(number)
   const lastDigit = lastTwoDigits[1] || lastTwoDigits[0]
 
-  if (inRange(Number(lastTwoDigits), [11, 19]) || lastDigit === "0" || Number(lastDigit) > 4) {
+  if (
+    isNumberInRange(Number(lastTwoDigits), [11, 19]) ||
+    lastDigit === "0" ||
+    Number(lastDigit) > 4
+  ) {
     return ClassPostfixesEnum.MANY_OR_ZERO_THINGS_POSTFIX
   }
   if (lastDigit === "1") {
@@ -45,12 +48,12 @@ export function computePostfixForNumber(number: string): string {
  * @return {Number} Index of a certain postfix.
  */
 export function computeWordForThousandsClass(number: string) {
-  const lastTwoDigits = lastTwoChars(number)
+  const lastTwoDigits = getLastTwoChars(number)
   const lastDigit = lastTwoDigits[1] || lastTwoDigits[0]
   if (lastDigit === "1") {
     return "тысяча"
   }
-  if (inRange(lastDigit, [2, 4]) && !inRange(lastTwoDigits, [12, 14])) {
+  if (isNumberInRange(lastDigit, [2, 4]) && !isNumberInRange(lastTwoDigits, [12, 14])) {
     return "тысячи"
   }
   return "тысяч"

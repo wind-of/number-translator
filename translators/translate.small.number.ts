@@ -1,6 +1,6 @@
 import { getDigit, getDozens, getHundreds } from "../numbers/word.primitive.getters"
 import { FROM_10_TO_19 } from "../constants/word.forms"
-import { lastTwoChars } from "../utils/two-last-digits"
+import { getLastTwoChars } from "../utils"
 
 /**
  * @function translateThreeOrLessDigitNumber
@@ -14,7 +14,7 @@ export function translateThreeOrLessDigitNumber(number_: string): string {
   if (number < 10) return getDigit(number)
   if (number < 20) return FROM_10_TO_19[number - 10]
   if (number < 100) {
-    const [dozen, digit] = lastTwoChars(number.toString())
+    const [dozen, digit] = getLastTwoChars(number.toString())
     return Number(digit) === 0 ? getDozens(dozen) : `${getDozens(dozen)} ${getDigit(digit)}`
   }
 
