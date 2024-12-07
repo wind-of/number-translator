@@ -7,7 +7,7 @@ import {
 } from "./errors"
 import { isSafeNumber } from "../utils/is-safe-number"
 
-export function findError(number: string | number) {
+export function findError(number: string | number): string {
   const predicates = [
     {
       isInvalid: (number: string | number) => isNaN(parseFloat(number.toString())),
@@ -38,5 +38,5 @@ export function findError(number: string | number) {
     },
   ]
 
-  return predicates.find(({ isInvalid }) => isInvalid(number))?.message
+  return predicates.find(({ isInvalid }) => isInvalid(number))?.message || ""
 }

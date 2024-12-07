@@ -37,7 +37,9 @@ function findError(number) {
       message: errors_1.TOO_BIG_NUMBER,
     },
   ]
-  return (_a = predicates.find(({ isInvalid }) => isInvalid(number))) === null || _a === void 0
-    ? void 0
-    : _a.message
+  return (
+    ((_a = predicates.find(({ isInvalid }) => isInvalid(number))) === null || _a === void 0
+      ? void 0
+      : _a.message) || ""
+  )
 }

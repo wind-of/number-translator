@@ -12,7 +12,7 @@ import { inRange } from "../utils/in-range"
  * Position of the number in the source number. Example: 5765123321 => 5(3) 756(2) 123(1) 321(0).
  * @return {String} A string value that is a special class word.
  */
-export function getClassWord(number: string, classIndex: number) {
+export function getClassWord(number: string, classIndex: number): string {
   return classIndex === 1
     ? computeWordForThousandsClass(number)
     : CLASS_WORDS[classIndex] + computePostfixForNumber(number)
@@ -25,7 +25,7 @@ export function getClassWord(number: string, classIndex: number) {
  * String number.
  * @return {Number} Index of a certain postfix.
  */
-export function computePostfixForNumber(number: string) {
+export function computePostfixForNumber(number: string): string {
   const lastTwoDigits = lastTwoChars(number)
   const lastDigit = lastTwoDigits[1] || lastTwoDigits[0]
 

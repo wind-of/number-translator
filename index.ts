@@ -13,7 +13,6 @@ const output = (message: string, type: string) => ({ message, type })
 
 function translateNumberSource(number: string): string {
   if (Number(number) < 0) {
-    // FIXME
     return `минус ${translateNumberSource(number.toString().slice(1))}`
   }
 
@@ -67,7 +66,7 @@ function translateNumberSource(number: string): string {
  *
  * @return {String} Translated non-integer part.
  */
-function translateNonIntegerPart(number: string) {
+function translateNonIntegerPart(number: string): string {
   if (Number(number) === 0) {
     return ""
   }

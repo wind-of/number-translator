@@ -14,7 +14,6 @@ const errors_1 = require("./validation/errors")
 const output = (message, type) => ({ message, type })
 function translateNumberSource(number) {
   if (Number(number) < 0) {
-    // FIXME
     return `минус ${translateNumberSource(number.toString().slice(1))}`
   }
   number = (0, prepare_number_1.prepareNumber)(number)

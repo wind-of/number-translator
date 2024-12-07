@@ -11,7 +11,7 @@ import { translateThreeOrLessDigitNumber } from "./translate.small.number"
  * Position of the number in the source number. Example: 5765123321 => 5(3) 756(2) 123(1) 321(0)
  * @return {String}
  */
-export function getTranslatedNumberWithClassWord(number: string, classIndex: number) {
+export function getTranslatedNumberWithClassWord(number: string, classIndex: number): string {
   if (classIndex === 0) {
     return translateThreeOrLessDigitNumber(number)
   } else if (Number(number) === 0) {
