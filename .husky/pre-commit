@@ -3,4 +3,5 @@
 
 npm run build
 git add .
+npm run test
 npx lint-staged --allow-empty
