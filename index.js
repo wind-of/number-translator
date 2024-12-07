@@ -43,9 +43,7 @@ function translateNumber(number) {
   for(let classIndex = 0;; classIndex++, number = removeLastNSymbols(number, 3)) {
     if(number.length < 4) {
       const wordFromNumber = getTranslatedNumberWithClassWord(number, classIndex);
-      if(wordFromNumber) {
-        translatedParts.unshift(wordFromNumber)
-      }
+      if(wordFromNumber) { translatedParts.unshift(wordFromNumber) }
       break
     }
     const triplet = number.slice(number.length - 3, number.length);
