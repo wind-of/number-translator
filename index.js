@@ -44,7 +44,7 @@ function translateNumber(number) {
     if(number.length < 4) {
       const wordFromNumber = getTranslatedNumberWithClassWord(number, classIndex);
       if (wordFromNumber) { translatedParts.unshift(wordFromNumber)
-        
+
        }
       break
     }
@@ -53,8 +53,7 @@ function translateNumber(number) {
     if(classIndex === 0 && wordFromTriplet === "ноль") {
       continue
     }
-    if(wordFromTriplet) {
-      translatedParts.unshift(wordFromTriplet)
+    if(wordFromTriplet) {      translatedParts.unshift(wordFromTriplet)
     }
   }
   return translatedParts.join(" ")
