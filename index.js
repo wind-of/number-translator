@@ -89,8 +89,8 @@ function translateNonIntegerPart(number) {
       : translated
     ) + ` ${getCategoryWordForNonIntegerPart(number.length)}` + nonIntegerPartType
 }
-
-module.exports = {
+ 
+module.exports = { 
   translateNumber: (input) => {
     const output_ = translateNumber(input)
     return output_.message ? output_ : output(output_, OUTPUT_TYPE_VALID) 
