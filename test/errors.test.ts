@@ -1,9 +1,14 @@
-const { expectToBe } = require("./utils");
-const { NOT_A_NUMBER, NOT_SAFE_NUMBER, NON_NUMERIC_SYMBOLS, EXTRA_SYMBOLS, TOO_BIG_NUMBER } = require("../validation/errors");
+import { expectToBe } from "./utils"
+import {
+  NOT_A_NUMBER,
+  NOT_SAFE_NUMBER,
+  NON_NUMERIC_SYMBOLS,
+  EXTRA_SYMBOLS,
+  TOO_BIG_NUMBER,
+} from "../validation/errors"
 
 test("Non-numeric values", () => {
-  ["f", "", [], {}, null, NaN, undefined]
-    .forEach(arg => expectToBe(arg, NOT_A_NUMBER, true))
+  ;["f", "", [], {}, null, NaN, undefined].forEach((arg) => expectToBe(arg, NOT_A_NUMBER, true))
 })
 
 test("Unsafe numbers", () => {
