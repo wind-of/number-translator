@@ -4,7 +4,7 @@ import {
   NON_NUMERIC_SYMBOLS,
   EXTRA_SYMBOLS,
   TOO_BIG_NUMBER,
-} from "./errors"
+} from "../constants/errors"
 import { isSafeNumber } from "../utils/is-safe-number"
 
 export function findError(number: string | number): string {

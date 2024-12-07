@@ -5,7 +5,7 @@ exports.computePostfixForNumber = computePostfixForNumber
 exports.computeWordForThousandsClass = computeWordForThousandsClass
 exports.getCategoryWordForNonIntegerPart = getCategoryWordForNonIntegerPart
 const word_forms_1 = require("../constants/word.forms")
-const word_postfixes_const_1 = require("../constants/word.postfixes.const")
+const types_1 = require("../types")
 const two_last_digits_1 = require("../utils/two-last-digits")
 const in_range_1 = require("../utils/in-range")
 /**
@@ -37,12 +37,12 @@ function computePostfixForNumber(number) {
     lastDigit === "0" ||
     Number(lastDigit) > 4
   ) {
-    return word_postfixes_const_1.ClassPostfixes.MANY_OR_ZERO_THINGS_POSTFIX
+    return types_1.ClassPostfixesEnum.MANY_OR_ZERO_THINGS_POSTFIX
   }
   if (lastDigit === "1") {
-    return word_postfixes_const_1.ClassPostfixes.ONE_THING_POSTFIX
+    return types_1.ClassPostfixesEnum.ONE_THING_POSTFIX
   }
-  return word_postfixes_const_1.ClassPostfixes.FEW_THINGS_POSTFIX
+  return types_1.ClassPostfixesEnum.FEW_THINGS_POSTFIX
 }
 /**
  * @function computeWordForThousandsClass

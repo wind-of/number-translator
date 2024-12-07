@@ -1,5 +1,5 @@
 import { CLASS_WORDS, NON_INTEGER_PART_CATEGORIES } from "../constants/word.forms"
-import { ClassPostfixes } from "../constants/word.postfixes.const"
+import { ClassPostfixesEnum } from "../types"
 import { lastTwoChars } from "../utils/two-last-digits"
 import { inRange } from "../utils/in-range"
 
@@ -30,12 +30,12 @@ export function computePostfixForNumber(number: string): string {
   const lastDigit = lastTwoDigits[1] || lastTwoDigits[0]
 
   if (inRange(Number(lastTwoDigits), [11, 19]) || lastDigit === "0" || Number(lastDigit) > 4) {
-    return ClassPostfixes.MANY_OR_ZERO_THINGS_POSTFIX
+    return ClassPostfixesEnum.MANY_OR_ZERO_THINGS_POSTFIX
   }
   if (lastDigit === "1") {
-    return ClassPostfixes.ONE_THING_POSTFIX
+    return ClassPostfixesEnum.ONE_THING_POSTFIX
   }
-  return ClassPostfixes.FEW_THINGS_POSTFIX
+  return ClassPostfixesEnum.FEW_THINGS_POSTFIX
 }
 /**
  * @function computeWordForThousandsClass

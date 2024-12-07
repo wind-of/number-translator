@@ -1,7 +1,7 @@
 "use strict"
 Object.defineProperty(exports, "__esModule", { value: true })
 exports.findError = findError
-const errors_1 = require("./errors")
+const errors_1 = require("../constants/errors")
 const is_safe_number_1 = require("../utils/is-safe-number")
 function findError(number) {
   var _a

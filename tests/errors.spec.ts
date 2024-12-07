@@ -5,7 +5,7 @@ import {
   NON_NUMERIC_SYMBOLS,
   EXTRA_SYMBOLS,
   TOO_BIG_NUMBER,
-} from "../validation/errors"
+} from "../constants/errors"
 
 test("Non-numeric values", () => {
   ;["f", "", [], {}, null, NaN, undefined].forEach((arg) => expectToBe(arg, NOT_A_NUMBER, true))

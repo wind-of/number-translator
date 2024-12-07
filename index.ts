@@ -3,11 +3,11 @@ import { translateThreeOrLessDigitNumber } from "./translators/translate.small.n
 import { getTranslatedNumberWithClassWord } from "./translators/translate.number.triplet"
 import { removeLastNSymbols } from "./utils/remove-last-n-symbols"
 import { lastTwoChars } from "./utils/two-last-digits"
-import { NonIntegersPostfixes } from "./constants/word.postfixes.const"
-import { OUTPUT_TYPE_ERROR, OUTPUT_TYPE_VALID } from "./constants/output.types"
+import { NonIntegersPostfixesEnum } from "./types"
+import { OutputTypesEnum } from "./types"
 import { findError } from "./validation/is-valid-number"
 import { prepareNumber } from "./utils/prepare-number"
-import { NOT_A_NUMBER } from "./validation/errors"
+import { NOT_A_NUMBER } from "./constants/errors"
 
 const output = (message: string, type: string) => ({ message, type })
 
@@ -79,11 +79,11 @@ function translateNonIntegerPart(number: string): string {
   const lastDigit = lastTwoDigits[1] || lastTwoDigits[0]
   const nonIntegerPartType =
     lastDigit === "1" && lastTwoDigits !== "11"
-      ? NonIntegersPostfixes.ENDS_WITH_ONE
-      : NonIntegersPostfixes.OTHERWISE
+      ? NonIntegersPostfixesEnum.ENDS_WITH_ONE
+      : NonIntegersPostfixesEnum.OTHERWISE
 
   return (
-    (nonIntegerPartType === NonIntegersPostfixes.ENDS_WITH_ONE
+    (nonIntegerPartType === NonIntegersPostfixesEnum.ENDS_WITH_ONE
       ? removeLastNSymbols(translated, 4) + "одна"
       : translated) +
     ` ${getCategoryWordForNonIntegerPart(number.length)}` +
@@ -93,10 +93,10 @@ function translateNonIntegerPart(number: string): string {
 
 export function translateNumber(input: any) {
   if (!["string", "number"].includes(typeof input)) {
-    return output(NOT_A_NUMBER, OUTPUT_TYPE_ERROR)
+    return output(NOT_A_NUMBER, OutputTypesEnum.OUTPUT_TYPE_ERROR)
   }
   const error = findError(input)
   return error
-    ? output(String(error), OUTPUT_TYPE_ERROR)
-    : output(translateNumberSource(input.toString()), OUTPUT_TYPE_VALID)
+    ? output(String(error), OutputTypesEnum.OUTPUT_TYPE_ERROR)
+    : output(translateNumberSource(input.toString()), OutputTypesEnum.OUTPUT_TYPE_VALID)
 }
