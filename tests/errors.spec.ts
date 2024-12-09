@@ -25,7 +25,6 @@ test("Extra symbols", () => {
   expectToBe("22-22", EXTRA_SYMBOLS, true)
   expectToBe("22.2.212312321321", EXTRA_SYMBOLS, true)
   expectToBe("-2222222-222222", EXTRA_SYMBOLS, true)
-  // Todo: expectToBe("--222222", EXTRA_SYMBOLS, true), currently expectToBe("--222222", NOT_A_NUMBER, true)
 })
 
 test("Too big number", () => {
